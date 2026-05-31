@@ -1,0 +1,573 @@
+/* ===================================================
+   PENSA-UMaT Church Website — Main JavaScript
+   "Christ in You — The Hope of Glory"
+   =================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  initNavigation();
+  initNavDropdown();
+  initActivePageHighlight();
+  initNavbarScroll(); /* ADDED — handles transparent→solid navbar on scroll */
+  initModals();
+  initVideoModal();
+  initSermonFilters();
+  initLoadMore();
+  initCelebrations();
+  initJoinDepartment();
+  initJoinFamily();
+  initScrollAnimations();
+});
+
+/* =====================================================
+   NAVBAR SCROLL BEHAVIOR
+   ADDED — toggles .navbar--scrolled class based on scroll position.
+   When at the top of the page, navbar is transparent and overlays the hero.
+   After scrolling past the hero, navbar gets a solid white background.
+   Also forces solid bg when mobile hamburger menu is open.
+   ===================================================== */
+function initNavbarScroll() {
+  const navbar = document.getElementById('navbar');
+  if (!navbar) return;
+
+  const handleScroll = () => {
+    const hero = document.querySelector('.hero');
+    /* Scroll threshold: switch to solid bg after scrolling 50px */
+    const scrollThreshold = 50;
+
+    if (window.scrollY > scrollThreshold) {
+      navbar.classList.add('navbar--scrolled');
+    } else {
+      navbar.classList.remove('navbar--scrolled');
+    }
+  };
+
+  /* Run once on load in case the page loads scrolled down */
+  handleScroll();
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  /* ADDED: also force solid navbar when mobile menu is toggled open */
+  const hamburger = document.getElementById('hamburger');
+  if (hamburger) {
+    const observer = new MutationObserver(() => {
+      if (hamburger.classList.contains('active')) {
+        navbar.classList.add('navbar--scrolled');
+      } else {
+        handleScroll(); /* Re-evaluate based on scroll position */
+      }
+    });
+    observer.observe(hamburger, { attributes: true, attributeFilter: ['class'] });
+  }
+}
+
+/* =====================================================
+   NAVIGATION
+   ===================================================== */
+function initNavigation() {
+  const hamburger = document.querySelector('.navbar__hamburger');
+  const navLinks = document.querySelector('.navbar__links');
+  
+  if (!hamburger || !navLinks) return;
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+
+  // Close mobile menu on link click
+  navLinks.querySelectorAll('.navbar__link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+    });
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.navbar')) {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+    }
+  });
+}
+
+/* =====================================================
+   ACTIVE PAGE HIGHLIGHT
+   ===================================================== */
+function initActivePageHighlight() {
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const aboutSubPages = ['about.html', 'leadership.html', 'family.html'];
+  
+  document.querySelectorAll('.navbar__link').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPage || 
+        (currentPage === '' && href === 'index.html') ||
+        (currentPage === 'index.html' && href === 'index.html')) {
+      link.classList.add('navbar__link--active');
+    }
+  });
+
+  // Highlight About dropdown toggle if on any about sub-page
+  if (aboutSubPages.includes(currentPage)) {
+    document.querySelectorAll('.navbar__dropdown-toggle').forEach(toggle => {
+      toggle.classList.add('navbar__dropdown-toggle--active');
+    });
+    // Highlight the specific sub-item
+    document.querySelectorAll('.navbar__dropdown-item').forEach(item => {
+      const href = item.getAttribute('href');
+      if (href === currentPage) {
+        item.classList.add('navbar__dropdown-item--active');
+      }
+    });
+  }
+}
+
+/* =====================================================
+   NAVBAR DROPDOWN (Mobile Toggle)
+   ===================================================== */
+function initNavDropdown() {
+  const dropdowns = document.querySelectorAll('.navbar__dropdown');
+  
+  dropdowns.forEach(dropdown => {
+    const toggle = dropdown.querySelector('.navbar__dropdown-toggle');
+    if (!toggle) return;
+
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const isOpen = dropdown.classList.contains('open');
+      // Close all dropdowns first
+      dropdowns.forEach(d => d.classList.remove('open'));
+      if (!isOpen) {
+        dropdown.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      } else {
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // Close dropdown on outside click
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.navbar__dropdown')) {
+      dropdowns.forEach(d => {
+        d.classList.remove('open');
+        const toggle = d.querySelector('.navbar__dropdown-toggle');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+}
+
+/* =====================================================
+   MODAL SYSTEM
+   ===================================================== */
+function initModals() {
+  // Close modal on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        closeModal(overlay);
+      }
+    });
+  });
+
+  // Close modal on close button
+  document.querySelectorAll('.modal__close').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const overlay = btn.closest('.modal-overlay');
+      if (overlay) closeModal(overlay);
+    });
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(closeModal);
+    }
+  });
+}
+
+function openModal(id) {
+  const overlay = document.getElementById(id);
+  if (overlay) {
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeModal(overlayOrId) {
+  const overlay = typeof overlayOrId === 'string' 
+    ? document.getElementById(overlayOrId) 
+    : overlayOrId;
+  if (overlay) {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+/* =====================================================
+   VIDEO MODAL
+   ===================================================== */
+function initVideoModal() {
+  document.querySelectorAll('[data-video]').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      openModal('videoModal');
+    });
+  });
+}
+
+/* =====================================================
+   SERMON FILTERS
+   ===================================================== */
+function initSermonFilters() {
+  const seriesFilter = document.getElementById('filterSeries');
+  const speakerFilter = document.getElementById('filterSpeaker');
+  const searchInput = document.getElementById('filterSearch');
+  const resetBtn = document.getElementById('resetFilters');
+
+  if (!seriesFilter) return;
+
+  const filterSermons = () => {
+    const series = seriesFilter.value.toLowerCase();
+    const speaker = speakerFilter.value.toLowerCase();
+    const search = searchInput.value.toLowerCase().trim();
+
+    let visibleCount = 0;
+
+    document.querySelectorAll('.sermon-card').forEach(card => {
+      const cardSeries = (card.dataset.series || '').toLowerCase();
+      const cardSpeaker = (card.dataset.speaker || '').toLowerCase();
+      const cardTitle = (card.querySelector('.sermon-card__title')?.textContent || '').toLowerCase();
+
+      const matchSeries = !series || cardSeries === series;
+      const matchSpeaker = !speaker || cardSpeaker === speaker;
+      const matchSearch = !search || cardTitle.includes(search) || cardSpeaker.includes(search);
+
+      if (matchSeries && matchSpeaker && matchSearch) {
+        card.style.display = '';
+        card.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    const countEl = document.querySelector('.sermon-grid__count');
+    if (countEl) {
+      countEl.textContent = `Showing ${visibleCount} sermons`;
+    }
+  };
+
+  seriesFilter.addEventListener('change', filterSermons);
+  speakerFilter.addEventListener('change', filterSermons);
+  searchInput.addEventListener('input', filterSermons);
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      seriesFilter.value = '';
+      speakerFilter.value = '';
+      searchInput.value = '';
+      filterSermons();
+    });
+  }
+}
+
+/* =====================================================
+   LOAD MORE
+   ===================================================== */
+function initLoadMore() {
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  if (!loadMoreBtn) return;
+
+  loadMoreBtn.addEventListener('click', () => {
+    const hiddenCards = document.querySelectorAll('.sermon-card.hidden');
+    let revealed = 0;
+    hiddenCards.forEach(card => {
+      if (revealed < 3) {
+        card.classList.remove('hidden');
+        card.style.display = '';
+        card.style.animation = 'fadeInUp 0.5s ease forwards';
+        revealed++;
+      }
+    });
+
+    // Update count
+    const allVisible = document.querySelectorAll('.sermon-card:not(.hidden)').length;
+    const countEl = document.querySelector('.sermon-grid__count');
+    if (countEl) {
+      countEl.textContent = `Showing ${allVisible} sermons`;
+    }
+
+    // Hide load more if no more hidden cards
+    const remaining = document.querySelectorAll('.sermon-card.hidden').length;
+    if (remaining === 0) {
+      loadMoreBtn.style.display = 'none';
+    }
+  });
+}
+
+/* =====================================================
+   CELEBRATIONS (Birthdays)
+   ===================================================== */
+function initCelebrations() {
+  // Send Celebration buttons
+  document.querySelectorAll('[data-celebrate]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.dataset.celebrate;
+      openModal('celebrationModal');
+      const titleEl = document.querySelector('#celebrationModal .modal__title');
+      if (titleEl) titleEl.textContent = `🎉 Celebrate ${name}!`;
+    });
+  });
+
+  // Quick celebrate in "Later This Month"
+  document.querySelectorAll('.later-month__action').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.dataset.name;
+      showConfetti();
+      showToast(`🎂 Birthday wishes sent to ${name}!`);
+    });
+  });
+
+  // Write Message buttons
+  document.querySelectorAll('[data-message]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.dataset.message;
+      openModal('messageModal');
+      const titleEl = document.querySelector('#messageModal .modal__title');
+      if (titleEl) titleEl.textContent = `Write a message to ${name}`;
+    });
+  });
+
+  // Update Details button
+  const updateBtn = document.getElementById('updateDetailsBtn');
+  if (updateBtn) {
+    updateBtn.addEventListener('click', () => {
+      openModal('updateModal');
+    });
+  }
+
+  // Celebration form submit
+  const celebrationForm = document.getElementById('celebrationForm');
+  if (celebrationForm) {
+    celebrationForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      closeModal('celebrationModal');
+      showConfetti();
+      showToast('🎉 Celebration sent successfully!');
+      celebrationForm.reset();
+    });
+  }
+
+  // Message form submit
+  const messageForm = document.getElementById('messageForm');
+  if (messageForm) {
+    messageForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      closeModal('messageModal');
+      showToast('✉️ Message sent successfully!');
+      messageForm.reset();
+    });
+  }
+
+  // Update form submit
+  const updateForm = document.getElementById('updateForm');
+  if (updateForm) {
+    updateForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      closeModal('updateModal');
+      showToast('✅ Birthday details submitted!');
+      updateForm.reset();
+    });
+  }
+}
+
+/* =====================================================
+   JOIN DEPARTMENT
+   ===================================================== */
+function initJoinDepartment() {
+  document.querySelectorAll('[data-join-dept]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const dept = btn.dataset.joinDept;
+      openModal('joinDeptModal');
+      const titleEl = document.querySelector('#joinDeptModal .modal__title');
+      if (titleEl) titleEl.textContent = `Join ${dept}`;
+      const deptInput = document.getElementById('joinDeptName');
+      if (deptInput) deptInput.value = dept;
+    });
+  });
+
+  // Contact Leadership
+  const contactLeaderBtn = document.getElementById('contactLeadershipBtn');
+  if (contactLeaderBtn) {
+    contactLeaderBtn.addEventListener('click', () => {
+      openModal('contactModal');
+    });
+  }
+
+  // Department form submit
+  const joinForm = document.getElementById('joinDeptForm');
+  if (joinForm) {
+    joinForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const dept = document.getElementById('joinDeptName')?.value;
+      closeModal('joinDeptModal');
+      showToast(`🙏 Request to join ${dept} submitted!`);
+      joinForm.reset();
+    });
+  }
+
+  // Contact form submit
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      closeModal('contactModal');
+      showToast('📩 Message sent to leadership team!');
+      contactForm.reset();
+    });
+  }
+}
+
+/* =====================================================
+   JOIN FAMILY (Zones)
+   ===================================================== */
+function initJoinFamily() {
+  document.querySelectorAll('[data-join-family]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const family = btn.dataset.joinFamily;
+      openModal('joinFamilyModal');
+      const titleEl = document.querySelector('#joinFamilyModal .modal__title');
+      if (titleEl) titleEl.textContent = `Join ${family}`;
+      const familyInput = document.getElementById('joinFamilyName');
+      if (familyInput) familyInput.value = family;
+    });
+  });
+
+  // Contact Zone Leader
+  const contactZoneBtn = document.getElementById('contactZoneLeaderBtn');
+  if (contactZoneBtn) {
+    contactZoneBtn.addEventListener('click', () => {
+      openModal('contactZoneModal');
+    });
+  }
+
+  // Family form submit
+  const joinFamilyForm = document.getElementById('joinFamilyForm');
+  if (joinFamilyForm) {
+    joinFamilyForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const family = document.getElementById('joinFamilyName')?.value;
+      closeModal('joinFamilyModal');
+      showToast(`🏠 Welcome! Request to join ${family} submitted!`);
+      joinFamilyForm.reset();
+    });
+  }
+
+  // Contact zone form submit
+  const contactZoneForm = document.getElementById('contactZoneForm');
+  if (contactZoneForm) {
+    contactZoneForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      closeModal('contactZoneModal');
+      showToast('📩 Message sent to zone leaders!');
+      contactZoneForm.reset();
+    });
+  }
+}
+
+/* =====================================================
+   CONFETTI ANIMATION
+   ===================================================== */
+function showConfetti() {
+  const container = document.createElement('div');
+  container.className = 'confetti-container';
+  document.body.appendChild(container);
+
+  const colors = ['#d4a017', '#e8b830', '#0d1f3c', '#ef4444', '#22c55e', '#3b82f6', '#f59e0b', '#ec4899'];
+  const shapes = ['square', 'circle'];
+
+  for (let i = 0; i < 80; i++) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const shape = shapes[Math.floor(Math.random() * shapes.length)];
+    const left = Math.random() * 100;
+    const drift = (Math.random() - 0.5) * 200;
+    const delay = Math.random() * 0.8;
+    const duration = 2 + Math.random() * 2;
+    const size = 6 + Math.random() * 8;
+
+    confetti.style.cssText = `
+      left: ${left}%;
+      width: ${size}px;
+      height: ${size}px;
+      background: ${color};
+      border-radius: ${shape === 'circle' ? '50%' : '2px'};
+      --drift: ${drift}px;
+      animation: confettiFall ${duration}s ease-in ${delay}s forwards;
+    `;
+
+    container.appendChild(confetti);
+  }
+
+  setTimeout(() => container.remove(), 5000);
+}
+
+/* =====================================================
+   TOAST NOTIFICATION
+   ===================================================== */
+function showToast(message) {
+  // Remove existing toasts
+  document.querySelectorAll('.toast').forEach(t => t.remove());
+
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `<span class="toast__text">${message}</span>`;
+  document.body.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.classList.add('active');
+  });
+
+  setTimeout(() => {
+    toast.classList.remove('active');
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
+/* =====================================================
+   SCROLL ANIMATIONS
+   ===================================================== */
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.event-card, .dept-card, .sermon-card, .birthday-card, .leader-card, .leader-card-lg, .family-card, .timeline__item, .mv-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+}
+
+// CSS class for animation trigger
+const style = document.createElement('style');
+style.textContent = `
+  .animate-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+`;
+document.head.appendChild(style);

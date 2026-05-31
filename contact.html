@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Get in touch with PENSA-UMaT. Visit us at UMaT Main Campus, Tarkwa, or send us a message. We'd love to hear from you.">
+    <title>Contact Us | PENSA-UMaT</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <style>
+        /* ===== CONTACT PAGE SPECIFIC STYLES ===== */
+        .contact-section {
+            padding: var(--space-4xl) 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+            align-items: start;
+        }
+
+        /* Contact Info Side */
+        .contact-info__title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .contact-info__sub {
+            font-size: 0.95rem;
+            color: var(--gray-500);
+            line-height: 1.7;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .contact-info__items {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .contact-info__item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+        }
+
+        .contact-info__icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: rgba(212, 160, 23, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-info__label {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .contact-info__value {
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        /* Service Times */
+        .service-times {
+            background: var(--navy-900);
+            color: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            margin-top: var(--space-xl);
+        }
+
+        .service-times__title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .service-times__list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .service-times__item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-times__item:last-child {
+            border-bottom: none;
+        }
+
+        .service-times__day {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .service-times__time {
+            font-size: 0.85rem;
+            color: var(--gold-400);
+            font-weight: 500;
+        }
+
+        /* Contact Form Side */
+        .contact-form-wrap {
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            border: 1px solid var(--gray-200);
+        }
+
+        .contact-form__title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .contact-form__sub {
+            font-size: 0.9rem;
+            color: var(--gray-500);
+            margin-bottom: var(--space-xl);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 0 0 var(--space-4xl);
+        }
+
+        .map-section__title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: var(--space-xl);
+            text-align: center;
+        }
+
+        .map-placeholder {
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-500);
+            gap: var(--space-md);
+        }
+
+        .map-placeholder__icon {
+            font-size: 3rem;
+        }
+
+        .map-placeholder__text {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .map-placeholder__sub {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: var(--space-4xl) 0;
+            background: var(--gray-50);
+        }
+
+        .faq-section__title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .faq-section__sub {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--gray-500);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .faq-list {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .faq-item {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: box-shadow var(--transition-fast);
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-item__question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-lg);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: color var(--transition-fast);
+        }
+
+        .faq-item__question:hover {
+            color: var(--gold-500);
+        }
+
+        .faq-item__icon {
+            font-size: 1.2rem;
+            transition: transform var(--transition-base);
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-item__icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-item__answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-base);
+        }
+
+        .faq-item.active .faq-item__answer {
+            max-height: 300px;
+        }
+
+        .faq-item__answer-text {
+            padding: 0 var(--space-lg) var(--space-lg);
+            font-size: 0.88rem;
+            color: var(--gray-500);
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <!-- ===== EMAILJS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>emailjs.init("41R4Z94qAY1Xyz4w_");</script>
+
+</head>
+
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar__logo"><!-- UPDATE IMAGE HERE --> <img src="images/logo.jpg"
+                    alt="PENSA-UMaT Logo" class="navbar__logo-img">PENSA–UMaT</a>
+            <div class="navbar__links" id="navLinks">
+                <a href="index.html" class="navbar__link">Home</a>
+                <div class="navbar__dropdown">
+                    <button class="navbar__dropdown-toggle" aria-expanded="false">
+                        About <span class="navbar__dropdown-arrow">▼</span>
+                    </button>
+                    <div class="navbar__dropdown-menu">
+                        <a href="about.html" class="navbar__dropdown-item">
+                            <span class="navbar__dropdown-item__icon">📖</span> About Us
+                        </a>
+                        <a href="leadership.html" class="navbar__dropdown-item">
+                            <span class="navbar__dropdown-item__icon">👥</span> Leadership
+                        </a>
+                        <a href="family.html" class="navbar__dropdown-item">
+                            <span class="navbar__dropdown-item__icon">🏠</span> Family / Zones
+                        </a>
+                    </div>
+                </div>
+                <a href="sermons.html" class="navbar__link">Sermons</a>
+                <a href="events.html" class="navbar__link">Events</a>
+                <a href="departments.html" class="navbar__link">Departments</a>
+                <a href="give.html" class="navbar__link">Give</a>
+                <a href="contact.html" class="navbar__link navbar__link--active">Contact</a>
+                <a href="birthdays.html" class="navbar__link">Birthdays</a>
+                <a href="#" class="navbar__cta" id="signInBtn" onclick="openAuthModal()">Sign In</a>
+            </div>
+            <!-- User Menu (shown when signed in) -->
+            <div class="user-menu" id="userMenu">
+                <button class="user-menu__trigger">
+                    <div class="user-menu__avatar">U</div>
+                    <span class="user-menu__trigger-name">User</span>
+                </button>
+                <div class="user-menu__dropdown">
+                    <div class="user-menu__dropdown-header">
+                        <div class="user-menu__dropdown-name">User Name</div>
+                        <div class="user-menu__dropdown-email">user@email.com</div>
+                    </div>
+                    <a href="birthdays.html" class="user-menu__dropdown-item">🎂 Birthdays</a>
+                    <a href="about.html" class="user-menu__dropdown-item">👤 My Profile</a>
+                    <button class="user-menu__dropdown-item user-menu__dropdown-item--danger" id="signOutBtn">🚪 Sign
+                        Out</button>
+                </div>
+            </div>
+            <button class="navbar__hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero hero--contact" id="heroContact">
+        <div class="container">
+            <h1 class="hero__title" style="font-family: var(--font-serif);">Get in Touch</h1>
+            <p class="hero__subtitle">We'd love to hear from you. Whether you have a question, prayer request, or just
+                want to
+                connect — reach out to us.</p>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section class="contact-section" id="contactSection">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- LEFT: Contact Info -->
+                <div class="contact-info">
+                    <h2 class="contact-info__title">Contact Information</h2>
+                    <p class="contact-info__sub">Reach out through any of the channels below, or fill in the form and
+                        we'll get
+                        back to you promptly.</p>
+
+                    <div class="contact-info__items">
+                        <div class="contact-info__item">
+                            <div class="contact-info__icon">📍</div>
+                            <div>
+                                <div class="contact-info__label">Our Location</div>
+                                <div class="contact-info__value">UMaT Main Campus Auditorium<br>University of Mines and
+                                    Technology<br>Tarkwa, Western Region, Ghana</div>
+                            </div>
+                        </div>
+                        <div class="contact-info__item">
+                            <div class="contact-info__icon">✉️</div>
+                            <div>
+                                <div class="contact-info__label">Email Us</div>
+                                <div class="contact-info__value">info@pensaumat.org<br>secretary@pensaumat.org</div>
+                            </div>
+                        </div>
+                        <div class="contact-info__item">
+                            <div class="contact-info__icon">📞</div>
+                            <div>
+                                <div class="contact-info__label">Call Us</div>
+                                <div class="contact-info__value">+233 55 123 4567<br>+233 24 987 6543</div>
+                            </div>
+                        </div>
+                        <div class="contact-info__item">
+                            <div class="contact-info__icon">🕐</div>
+                            <div>
+                                <div class="contact-info__label">Office Hours</div>
+                                <div class="contact-info__value">Monday – Friday: 9:00 AM – 5:00 PM<br>Saturday: By
+                                    appointment</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Times -->
+                    <div class="service-times">
+                        <h3 class="service-times__title">⛪ Service Times</h3>
+                        <div class="service-times__list">
+                            <div class="service-times__item">
+                                <span class="service-times__day">Sunday Service</span>
+                                <span class="service-times__time">6:00 AM – 9:00 AM</span>
+                            </div>
+                            <div class="service-times__item">
+                                <span class="service-times__day">Midweek Service</span>
+                                <span class="service-times__time">Tuesdays, 7:00 PM – 9:00 PM</span>
+                            </div>
+                            <div class="service-times__item">
+                                <span class="service-times__day">Wing Meetings</span>
+                                <span class="service-times__time">Bi-weekly Mondays, 7:00 PM - 9pm</span>
+                            </div>
+                            <div class="service-times__item">
+                                <!-- <span class="service-times__day">Dawn Broadcast</span>
+                <span class="service-times__time">Mon–Fri, 5:00 AM</span> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Contact Form -->
+                <div class="contact-form-wrap">
+                    <h3 class="contact-form__title">Send Us a Message</h3>
+                    <p class="contact-form__sub">Fill out the form below and we'll respond within 24 hours.</p>
+                    <form id="pageContactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pcFirstName">First Name</label>
+                                <input type="text" id="pcFirstName" placeholder="Enter first name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pcLastName">Last Name</label>
+                                <input type="text" id="pcLastName" placeholder="Enter last name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pcEmail">Email Address</label>
+                            <input type="email" id="pcEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pcPhone">Phone Number (Optional)</label>
+                            <input type="tel" id="pcPhone" placeholder="e.g. +233 55 000 0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="pcSubject">Subject</label>
+                            <select id="pcSubject">
+                                <option value="">Select a subject</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                                <option value="Prayer Request">Prayer Request</option>
+                                <option value="Membership">Membership</option>
+                                <option value="Join a Department">Join a Department</option>
+                                <option value="Feedback">Feedback</option>
+                                <option value="Partnership">Partnership</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="pcMessage">Your Message</label>
+                            <textarea id="pcMessage" placeholder="Write your message here..." required
+                                style="min-height: 120px;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--dark btn--block" style="padding: 0.9rem;">Send Message
+                            →</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MAP ===== -->
+    <section class="map-section" id="mapSection">
+        <div class="container">
+            <h2 class="map-section__title">Find Us on Campus</h2>
+            <div class="map-placeholder">
+                <div class="map-placeholder__icon">🗺️</div>
+                <div class="map-placeholder__text">UMaT Main Campus, Tarkwa</div>
+                <div class="map-placeholder__sub">University of Mines and Technology, Western Region, Ghana</div>
+                <a href="https://maps.google.com/?q=University+of+Mines+and+Technology+Tarkwa+Ghana" target="_blank"
+                    class="btn btn--primary btn--sm" style="margin-top: 0.5rem;">Open in Google Maps →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq-section" id="faqSection">
+        <div class="container">
+            <h2 class="faq-section__title">Frequently Asked Questions</h2>
+            <p class="faq-section__sub">Quick answers to common questions about PENSA-UMaT</p>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-item__question">
+                        <span>Who can join PENSA-UMaT?</span>
+                        <span class="faq-item__icon">+</span>
+                    </div>
+                    <div class="faq-item__answer">
+                        <p class="faq-item__answer-text">PENSA-UMaT is open to all students of the University of Mines
+                            and
+                            Technology, regardless of denomination. Whether you're a fresher or a final-year student,
+                            you're welcome
+                            to join our family!</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-item__question">
+                        <span>What time are Sunday services?</span>
+                        <span class="faq-item__icon">+</span>
+                    </div>
+                    <div class="faq-item__answer">
+                        <p class="faq-item__answer-text">Sunday services are held from 6:00 AM to 9:00 AM at the UMaT
+                            Main Campus
+                            Auditorium. We also have midweek services on Tuesdays from 7:00 PM to 9:00 PM, and bi-weekly
+                            Wing Meetings
+                            (Gent Wing & Lady Wing) on Mondays.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-item__question">
+                        <span>How can I join a department?</span>
+                        <span class="faq-item__icon">+</span>
+                    </div>
+                    <div class="faq-item__answer">
+                        <p class="faq-item__answer-text">Visit our <a href="departments.html"
+                                style="color: var(--gold-500); font-weight: 600;">Departments page</a> to learn about
+                            each ministry and
+                            submit a request to join. You can also speak to any of our leaders after service.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-item__question">
+                        <span>Can I submit a prayer request?</span>
+                        <span class="faq-item__icon">+</span>
+                    </div>
+                    <div class="faq-item__answer">
+                        <p class="faq-item__answer-text">Absolutely! Use the contact form above and select "Prayer
+                            Request" as the
+                            subject. Our prayer team will intercede on your behalf. All prayer requests are treated with
+                            strict
+                            confidentiality.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-item__question">
+                        <span>How can I support PENSA-UMaT financially?</span>
+                        <span class="faq-item__icon">+</span>
+                    </div>
+                    <div class="faq-item__answer">
+                        <p class="faq-item__answer-text">Visit our <a href="give.html"
+                                style="color: var(--gold-500); font-weight: 600;">Give page</a> to make tithes,
+                            offerings, or special
+                            donations. You can give via Mobile Money, bank transfer, or card payment. Every contribution
+                            makes a
+                            difference!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div>
+                    <div class="footer__logo"><!-- UPDATE IMAGE HERE --> <img src="images/logo.jpg"
+                            alt="PENSA-UMaT Logo" class="footer__logo-img">PENSA–UMaT</div>
+                    <p class="footer__tagline">Equipping students to be Christ-like leaders in academia and beyond.</p>
+                    <div class="footer__social">
+                        <a href="#" class="footer__social-link" aria-label="Twitter">𝕏</a>
+                        <a href="#" class="footer__social-link" aria-label="Instagram">◎</a>
+                        <a href="#" class="footer__social-link" aria-label="Facebook">f</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer__heading">Quick Links</h4>
+                    <div class="footer__links">
+                        <a href="index.html" class="footer__link">Home</a>
+                        <a href="sermons.html" class="footer__link">Sermons</a>
+                        <a href="contact.html" class="footer__link">Contact</a>
+                        <a href="departments.html" class="footer__link">Departments</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer__heading">Contact Info</h4>
+                    <div class="footer__contact-item">
+                        <span class="footer__contact-icon">📍</span>
+                        <span>UMaT Main Campus, Tarkwa, Ghana</span>
+                    </div>
+                    <div class="footer__contact-item">
+                        <span class="footer__contact-icon">✉️</span>
+                        <span>info@pensaumat.org</span>
+                    </div>
+                    <div class="footer__contact-item">
+                        <span class="footer__contact-icon">📞</span>
+                        <span>+233 55 123 4567</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                © 2024 PENSA-UMaT. Member of the UMaT Community.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // ===== FAQ ACCORDION =====
+        document.querySelectorAll('.faq-item__question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.closest('.faq-item');
+                const wasActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!wasActive) item.classList.add('active');
+            });
+        });
+
+        // ===== CONTACT FORM — EMAILJS =====
+        document.getElementById('pageContactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const btn = e.target.querySelector('button[type="submit"]');
+            const name = document.getElementById('pcFirstName').value;
+
+            // Show loading state
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            const templateParams = {
+                from_name: name + ' ' + document.getElementById('pcLastName').value,
+                from_email: document.getElementById('pcEmail').value,
+                phone: document.getElementById('pcPhone').value || 'Not provided',
+                subject: document.getElementById('pcSubject').value || 'No subject selected',
+                message: document.getElementById('pcMessage').value,
+            };
+
+            // ⬇️ PASTE YOUR SERVICE ID AND TEMPLATE ID BELOW
+            emailjs.send('service_497r67q', 'template_1ryiokg', templateParams)
+                .then(function () {
+                    const toast = document.createElement('div');
+                    toast.className = 'toast';
+                    toast.innerHTML = `<span class="toast__text">✅ Thank you ${name}! Your message has been sent. We'll get back to you within 24 hours.</span>`;
+                    document.body.appendChild(toast);
+                    requestAnimationFrame(() => toast.classList.add('active'));
+                    setTimeout(() => { toast.classList.remove('active'); setTimeout(() => toast.remove(), 300); }, 4000);
+                    e.target.reset();
+                    btn.textContent = 'Send Message →';
+                    btn.disabled = false;
+                })
+                .catch(function (error) {
+                    console.error('EmailJS error:', error);
+                    const toast = document.createElement('div');
+                    toast.className = 'toast';
+                    toast.innerHTML = `<span class="toast__text">❌ Failed to send. Please try again or contact us directly.</span>`;
+                    document.body.appendChild(toast);
+                    requestAnimationFrame(() => toast.classList.add('active'));
+                    setTimeout(() => { toast.classList.remove('active'); setTimeout(() => toast.remove(), 300); }, 4000);
+                    btn.textContent = 'Send Message →';
+                    btn.disabled = false;
+                });
+        });
+    </script>
+
+    <!-- ===== AUTH MODAL ===== -->
+    <div class="modal-overlay auth-modal" id="authModal">
+        <div class="modal">
+            <button class="modal__close" aria-label="Close">✕</button>
+            <h3 class="modal__title" style="margin-bottom: 4px;">Welcome to PENSA–UMaT</h3>
+            <p class="modal__subtitle">Christ in You — The Hope of Glory</p>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="signin">Sign In</button>
+                <button class="auth-tab" data-tab="register">Create Account</button>
+            </div>
+            <div class="auth-panel active" id="signinPanel">
+                <form id="signinForm">
+                    <div class="form-group">
+                        <label for="signinEmail">Email Address</label>
+                        <input type="email" id="signinEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signinPassword">Password</label>
+                        <div class="password-field">
+                            <input type="password" id="signinPassword" placeholder="Enter your password" required>
+                            <span class="password-toggle">👁</span>
+                        </div>
+                    </div>
+                    <div class="auth-options">
+                        <label><input type="checkbox"> Remember me</label>
+                        <a href="#">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="btn btn--dark btn--block">Sign In →</button>
+                </form>
+            </div>
+            <div class="auth-panel" id="registerPanel">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerName">Full Name</label>
+                        <input type="text" id="registerName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email Address</label>
+                        <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <div class="password-field">
+                            <input type="password" id="registerPassword" placeholder="Create a password (min 6 chars)"
+                                required minlength="6">
+                            <span class="password-toggle">👁</span>
+                        </div>
+                        <div class="password-strength">
+                            <div class="password-strength__bar"></div>
+                            <div class="password-strength__bar"></div>
+                            <div class="password-strength__bar"></div>
+                            <div class="password-strength__bar"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirm Password</label>
+                        <div class="password-field">
+                            <input type="password" id="registerConfirmPassword" placeholder="Confirm your password"
+                                required>
+                            <span class="password-toggle">👁</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--block">Create Account →</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

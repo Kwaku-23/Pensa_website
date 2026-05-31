@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Join a PENSA-UMaT family zone — Agape, Bethel, Calvary, or Damascus. Find your home within our fellowship community.">
+  <title>Family / Zones | PENSA-UMaT</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar__logo"><!-- UPDATE IMAGE HERE --> <img src="images/logo.jpg" alt="PENSA-UMaT Logo" class="navbar__logo-img">PENSA–UMaT</a>
+      <div class="navbar__links" id="navLinks">
+        <a href="index.html" class="navbar__link">Home</a>
+        <div class="navbar__dropdown">
+          <button class="navbar__dropdown-toggle navbar__dropdown-toggle--active" aria-expanded="false">
+            About <span class="navbar__dropdown-arrow">▼</span>
+          </button>
+          <div class="navbar__dropdown-menu">
+            <a href="about.html" class="navbar__dropdown-item">
+              <span class="navbar__dropdown-item__icon">📖</span> About Us
+            </a>
+            <a href="leadership.html" class="navbar__dropdown-item">
+              <span class="navbar__dropdown-item__icon">👥</span> Leadership
+            </a>
+            <a href="family.html" class="navbar__dropdown-item navbar__dropdown-item--active">
+              <span class="navbar__dropdown-item__icon">🏠</span> Family / Zones
+            </a>
+          </div>
+        </div>
+        <a href="sermons.html" class="navbar__link">Sermons</a>
+        <a href="events.html" class="navbar__link">Events</a>
+        <a href="departments.html" class="navbar__link">Departments</a>
+        <a href="give.html" class="navbar__link">Give</a>
+        <a href="contact.html" class="navbar__link">Contact</a>
+        <a href="birthdays.html" class="navbar__link">Birthdays</a>
+        <a href="#" class="navbar__cta" id="signInBtn" onclick="openAuthModal()">Sign In</a>
+      </div>
+      <!-- User Menu (shown when signed in) -->
+      <div class="user-menu" id="userMenu">
+        <button class="user-menu__trigger">
+          <div class="user-menu__avatar">U</div>
+          <span class="user-menu__trigger-name">User</span>
+        </button>
+        <div class="user-menu__dropdown">
+          <div class="user-menu__dropdown-header">
+            <div class="user-menu__dropdown-name">User Name</div>
+            <div class="user-menu__dropdown-email">user@email.com</div>
+          </div>
+          <a href="birthdays.html" class="user-menu__dropdown-item">🎂 Birthdays</a>
+          <a href="about.html" class="user-menu__dropdown-item">👤 My Profile</a>
+          <button class="user-menu__dropdown-item user-menu__dropdown-item--danger" id="signOutBtn">🚪 Sign Out</button>
+        </div>
+      </div>
+      <button class="navbar__hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero hero--family" id="heroFamily">
+    <div class="container">
+      <h1 class="hero__title" style="font-family: var(--font-serif);">Find Your Family</h1>
+      <p class="hero__subtitle">At PENSA-UMaT, no one walks alone. Join a zone-based family where you'll be cared for, mentored, and challenged to grow in faith and fellowship.</p>
+    </div>
+  </section>
+
+  <!-- ===== FAMILY ZONES GRID ===== -->
+  <section class="family-grid" id="familyGrid">
+    <div class="container">
+      <div class="family-grid__header">
+        <h2 class="family-grid__title">Our Family Zones</h2>
+        <p class="family-grid__subtitle">Each zone is a close-knit community within the larger PENSA-UMaT fellowship. Pick the one closest to you and get connected!</p>
+      </div>
+      <div class="family-grid__cards">
+        <!-- Zone A — Agape -->
+        <div class="family-card family-card--agape">
+          <div class="family-card__image">
+            <!-- UPDATE IMAGE HERE --> <img src="images/IMG_0090.jpg" alt="Hida zone">
+            <span class="family-card__zone-badge family-card__zone-badge--agape">Hida zone</span>
+          </div>
+          <div class="family-card__body">
+            <h3 class="family-card__title"><span class="family-card__title-icon">💚</span> Hida zone</h3>
+            <div class="family-card__leader">
+              <span class="family-card__leader-label">Zone Leader:</span> Brother James Mensah
+            </div>
+            <p class="family-card__desc">A family built on unconditional love. Agape members gather for weekly check-ins, Bible study, prayer walks, and mutual support through academic and personal challenges.</p>
+            <div class="family-card__stats">
+              <div class="family-card__stat">
+                <span class="family-card__stat-value">65+</span>
+                <span class="family-card__stat-label">Members</span>
+              </div>
+              <div class="family-card__stat">
+                <span class="family-card__stat-value">Tues</span>
+                <span class="family-card__stat-label">Meets</span>
+              </div>
+              <div class="family-card__stat">
+                <span class="family-card__stat-value">Block A</span>
+                <span class="family-card__stat-label">Area</span>
+              </div>
+            </div>
+            <button class="btn btn--dark btn--block family-card__cta" data-join-family="Hida zone">Join Hida zone</button>
+          </div>
+        </div>
+
+        <!-- Zone B — Bethel -->
+        <div class="family-card family-card--bethel">
+          <div class="family-card__image">
+            <!-- UPDATE IMAGE HERE --> <img src="images/_MG_9922.jpg" alt="KT Hall zone">
+            <span class="family-card__zone-badge family-card__zone-badge--bethel">KT Hall zone</span>
+          </div>
+          <div class="family-card__body">
+            <h3 class="family-card__title"><span class="family-card__title-icon">💛</span> KT Hall zone</h3>
+            <div class="family-card__leader">
+              <span class="family-card__leader-label">Zone Leader:</span> Sister Abena Owusu
+            </div>
+            <p class="family-card__desc">Bethel — the "House of God." This family focuses on deep worship, intercession, and creating a sanctuary where every member encounters God's presence intimately.</p>
+            <div class="family-card__stats">
+              <div class="family-card__stat">
+                <span class="family-card__stat-value">58+</span>
+                <span class="family-card__stat-label">Members</span>
+              </div>
+              <div class="family-card__stat">
+                <span class="family-card__stat-value">Wed</span>
+                <span class="family-card__stat-label">Meets</span>
+              </div>
+              <div class="family-card__stat">
+                <span class="family-card__stat-value">Block B</span>
+                <span class="family-card__stat-label">Area</span>
+              </div>
+            </div>
+            <button class="btn btn--dark btn--block family-card__cta" data-join-family="KT Hall zone">Join KT Hall zone</button>
+          </div>
+        </div>
+
+        <!-- Zone C — Calvary -->
+        <div class="family-card family-card--calvary">
+          <div class="family-card__image">
+            <!-- UPDATE IMAGE HERE --> <img src="images/IMG_0225.jpg" alt="Chambers of Mines zone">
+            <span class="family-card__zone-badge family-card__zone-badge--calvary">Chambers of Mines zone</span>
+          </div>
+          <div class="family-card__body">
+            <h3 class="family-card__title"><span class="family-card__title-icon">💙</span> Chambers of Mines zone</h3>
+            <div class="family-card__leader">
+              <span class="family-card__leader-label">Zone Leader:</span> Brother Kwame Asante
+            </div>
+            <p class="family-card__desc">Rooted in sacrifice and service. Calvary family members are known for their outreach heart, community clean-ups, and commitment to leading evangelism on campus.</p>
+            <div class="family-card__stats">
+              <div class="family-card__stat">
+                <span class="family-card__stat-value">72+</span>
+                <span class="family-card__stat-label">Members</span>
+              </div>
+              <div class="family-card__stat">
+                <span class="family-card__stat-value">Thurs</span>
+                <span class="family-card__stat-label">Meets</span>
+              </div>
+              <div class="family-card__stat">
+                <span class="family-card__stat-value">Block C</span>
+                <span class="family-card__stat-label">Area</span>
+              </div>
+            </div>
+            <button class="btn btn--dark btn--block family-card__cta" data-join-family="Chambers of Mines zone">Join Chambers of Mines zone</button>
+          </div>
+        </div>
+
+        <!-- Zone D — Damascus -->
+        <div class="family-card family-card--damascus">
+          <div class="family-card__image">
+            <!-- UPDATE IMAGE HERE --> <img src="images/IMG_0140.jpg" alt="Dreamers zone">
+            <span class="family-card__zone-badge family-card__zone-badge--damascus">Dreamers zone</span>
+          </div>
+          <div class="family-card__body">
+            <h3 class="family-card__title"><span class="family-card__title-icon">💗</span> Dreamers zone</h3>
+            <div class="family-card__leader">
+              <span class="family-card__leader-label">Zone Leader:</span> Sister Priscilla Danso
+            </div>
+            <p class="family-card__desc">Named after Paul's transformative journey, Damascus family is dedicated to mentorship, discipleship, and helping new converts and freshers find their footing in faith.</p>
+            <div class="family-card__stats">
+              <div class="family-card__stat">
+                <span class="family-card__stat-value">50+</span>
+                <span class="family-card__stat-label">Members</span>
+              </div>
+              <div class="family-card__stat">
+                <span class="family-card__stat-value">Fri</span>
+                <span class="family-card__stat-label">Meets</span>
+              </div>
+              <div class="family-card__stat">
+                <span class="family-card__stat-value">Block D</span>
+                <span class="family-card__stat-label">Area</span>
+              </div>
+            </div>
+            <button class="btn btn--dark btn--block family-card__cta" data-join-family="Dreamers zone">Join Dreamers zone</button>
+          </div>
+        </div>
+
+        <!-- CTA Card -->
+        <div class="family-card family-card--cta">
+          <div class="family-card__icon">?</div>
+          <h3 class="family-card__title">Not Sure Which Zone?</h3>
+          <p class="family-card__desc">Don't worry! Speak to any of our zone leaders or the welfare team and we'll help match you to the right family based on your hostel or area.</p>
+          <button class="btn btn--primary" id="contactZoneLeaderBtn">Contact a Zone Leader</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__logo"><!-- UPDATE IMAGE HERE --> <img src="images/logo.jpg" alt="PENSA-UMaT Logo" class="footer__logo-img">PENSA–UMaT</div>
+          <p class="footer__tagline">Raising Godly Leaders for National Development. Join our vibrant community of faith on campus.</p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Twitter">𝕏</a>
+            <a href="#" class="footer__social-link" aria-label="Instagram">◎</a>
+            <a href="#" class="footer__social-link" aria-label="Facebook">f</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">Quick Links</h4>
+          <div class="footer__links">
+            <a href="index.html" class="footer__link">Home</a>
+            <a href="sermons.html" class="footer__link">Sermons</a>
+            <a href="contact.html" class="footer__link">Contact</a>
+            <a href="departments.html" class="footer__link">Departments</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">Location</h4>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon">📍</span>
+            <span>University of Mines and Technology, Tarkwa, Western Region, Ghana</span>
+          </div>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon">✉️</span>
+            <span>info@pensaumat.org</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        © 2024 PENSA-UMaT. Member of the UMaT Community.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== JOIN FAMILY MODAL ===== -->
+  <div class="modal-overlay" id="joinFamilyModal">
+    <div class="modal">
+      <button class="modal__close" aria-label="Close">✕</button>
+      <h3 class="modal__title">Join Family</h3>
+      <p class="modal__subtitle">Fill in your details to join this family zone. Your zone leader will reach out to welcome you.</p>
+      <form id="joinFamilyForm">
+        <input type="hidden" id="joinFamilyName" value="">
+        <div class="form-group">
+          <label for="joinFamName">Full Name</label>
+          <input type="text" id="joinFamName" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="joinFamEmail">Email Address</label>
+          <input type="email" id="joinFamEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="joinFamPhone">Phone Number</label>
+          <input type="tel" id="joinFamPhone" placeholder="e.g. +233 55 000 0000">
+        </div>
+        <div class="form-group">
+          <label for="joinFamYear">Year / Level</label>
+          <select id="joinFamYear">
+            <option value="">Select your level</option>
+            <option value="100">Level 100</option>
+            <option value="200">Level 200</option>
+            <option value="300">Level 300</option>
+            <option value="400">Level 400</option>
+            <option value="postgrad">Postgraduate</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="joinFamHostel">Hostel / Area</label>
+          <input type="text" id="joinFamHostel" placeholder="e.g. Jubilee Hall, T-Poly, Off-campus">
+        </div>
+        <div class="form-group">
+          <label for="joinFamMessage">Any message? (Optional)</label>
+          <textarea id="joinFamMessage" placeholder="Tell us a bit about yourself..."></textarea>
+        </div>
+        <button type="submit" class="btn btn--dark btn--block">Submit Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== CONTACT ZONE LEADER MODAL ===== -->
+  <div class="modal-overlay" id="contactZoneModal">
+    <div class="modal">
+      <button class="modal__close" aria-label="Close">✕</button>
+      <h3 class="modal__title">Contact a Zone Leader</h3>
+      <p class="modal__subtitle">Not sure which zone to join? Send a message and we'll help you find the right family.</p>
+      <form id="contactZoneForm">
+        <div class="form-group">
+          <label for="contactZoneName">Full Name</label>
+          <input type="text" id="contactZoneName" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="contactZoneEmail">Email Address</label>
+          <input type="email" id="contactZoneEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="contactZoneMessage">Your Message</label>
+          <textarea id="contactZoneMessage" placeholder="Tell us about your hostel area, interests, or questions..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+
+  <!-- ===== AUTH MODAL ===== -->
+  <div class="modal-overlay auth-modal" id="authModal">
+    <div class="modal">
+      <button class="modal__close" aria-label="Close">✕</button>
+      <h3 class="modal__title" style="margin-bottom: 4px;">Welcome to PENSA–UMaT</h3>
+      <p class="modal__subtitle">Christ in You — The Hope of Glory</p>
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="signin">Sign In</button>
+        <button class="auth-tab" data-tab="register">Create Account</button>
+      </div>
+      <div class="auth-panel active" id="signinPanel">
+        <form id="signinForm">
+          <div class="form-group">
+            <label for="signinEmail">Email Address</label>
+            <input type="email" id="signinEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="signinPassword">Password</label>
+            <div class="password-field">
+              <input type="password" id="signinPassword" placeholder="Enter your password" required>
+              <span class="password-toggle">👁</span>
+            </div>
+          </div>
+          <div class="auth-options">
+            <label><input type="checkbox"> Remember me</label>
+            <a href="#">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn--dark btn--block">Sign In →</button>
+        </form>
+      </div>
+      <div class="auth-panel" id="registerPanel">
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="registerName">Full Name</label>
+            <input type="text" id="registerName" placeholder="Enter your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">Email Address</label>
+            <input type="email" id="registerEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <div class="password-field">
+              <input type="password" id="registerPassword" placeholder="Create a password (min 6 chars)" required minlength="6">
+              <span class="password-toggle">👁</span>
+            </div>
+            <div class="password-strength">
+              <div class="password-strength__bar"></div>
+              <div class="password-strength__bar"></div>
+              <div class="password-strength__bar"></div>
+              <div class="password-strength__bar"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="registerConfirmPassword">Confirm Password</label>
+            <div class="password-field">
+              <input type="password" id="registerConfirmPassword" placeholder="Confirm your password" required>
+              <span class="password-toggle">👁</span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block">Create Account →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="js/auth.js"></script>
+</body>
+</html>

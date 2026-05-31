@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Learn about PENSA-UMaT — Rooted in Faith, Growing in Excellence. Our mission, vision, journey, and leadership team.">
+  <title>About Us | PENSA-UMaT</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar__logo"><!-- UPDATE IMAGE HERE --> <img src="images/logo.jpg"
+          alt="PENSA-UMaT Logo" class="navbar__logo-img">PENSA–UMaT</a>
+      <div class="navbar__links" id="navLinks">
+        <a href="index.html" class="navbar__link">Home</a>
+        <div class="navbar__dropdown">
+          <button class="navbar__dropdown-toggle navbar__dropdown-toggle--active" aria-expanded="false">
+            About <span class="navbar__dropdown-arrow">▼</span>
+          </button>
+          <div class="navbar__dropdown-menu">
+            <a href="about.html" class="navbar__dropdown-item navbar__dropdown-item--active">
+              <span class="navbar__dropdown-item__icon">📖</span> About Us
+            </a>
+            <a href="leadership.html" class="navbar__dropdown-item">
+              <span class="navbar__dropdown-item__icon">👥</span> Leadership
+            </a>
+            <a href="family.html" class="navbar__dropdown-item">
+              <span class="navbar__dropdown-item__icon">🏠</span> Family / Zones
+            </a>
+          </div>
+        </div>
+        <a href="sermons.html" class="navbar__link">Sermons</a>
+        <a href="events.html" class="navbar__link">Events</a>
+        <a href="departments.html" class="navbar__link">Departments</a>
+        <a href="give.html" class="navbar__link">Give</a>
+        <a href="contact.html" class="navbar__link">Contact</a>
+        <a href="birthdays.html" class="navbar__link">Birthdays</a>
+        <a href="#" class="navbar__cta" id="signInBtn" onclick="openAuthModal()">Sign In</a>
+      </div>
+      <!-- User Menu (shown when signed in) -->
+      <div class="user-menu" id="userMenu">
+        <button class="user-menu__trigger">
+          <div class="user-menu__avatar">U</div>
+          <span class="user-menu__trigger-name">User</span>
+        </button>
+        <div class="user-menu__dropdown">
+          <div class="user-menu__dropdown-header">
+            <div class="user-menu__dropdown-name">User Name</div>
+            <div class="user-menu__dropdown-email">user@email.com</div>
+          </div>
+          <a href="birthdays.html" class="user-menu__dropdown-item">🎂 Birthdays</a>
+          <a href="about.html" class="user-menu__dropdown-item">👤 My Profile</a>
+          <button class="user-menu__dropdown-item user-menu__dropdown-item--danger" id="signOutBtn">🚪 Sign Out</button>
+        </div>
+      </div>
+      <button class="navbar__hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero hero--about" id="heroAbout">
+    <div class="container">
+      <h1 class="hero__title" style="font-family: var(--font-serif);">Rooted in Faith,<br>Growing in Excellence.</h1>
+      <p class="hero__subtitle">We are a vibrant community of students at the University of Mines and Technology,
+        dedicated to spiritual growth, academic excellence, and fostering a supportive family away from home.</p>
+    </div>
+  </section>
+
+  <!-- ===== WHO WE ARE ===== -->
+  <section class="section" style="padding-top: var(--space-4xl); padding-bottom: var(--space-2xl);">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <h2 style="font-size: 2rem; margin-bottom: var(--space-md); font-family: var(--font-serif);">Who We Are</h2>
+      <p style="font-size: 1.1rem; color: var(--gray-600); line-height: 1.8;">
+        <strong>PENSA</strong> stands for <strong>Pentecost Students and Associates</strong>. It is the dynamic campus
+        ministry and young professionals' wing of The Church of Pentecost. With a global presence across over 380
+        academic institutions in Ghana alone, we are focused on "Possessing the Nations" by bridging the gap between
+        faith, academia, and society. Our goal is to raise spiritually sound, academically strong, and socially relevant
+        individuals who transform their world with Christian principles.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CORE MISSION & VISION ===== -->
+  <section class="mission-vision section" id="missionVision" style="padding-top: 0;">
+    <div class="container">
+      <div class="mission-vision__grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+
+        <div class="mv-card mv-card--mission" style="background: var(--navy-900); color: white;">
+          <h3 class="mv-card__title"
+            style="color: white; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px;">Discipleship on
+            Campus</h3>
+          <p class="mv-card__text">Providing a safe, supportive spiritual environment for students and alumni to
+            maintain and grow their faith while pursuing higher education.</p>
+        </div>
+
+        <div class="mv-card mv-card--vision" style="background: var(--gold-500); color: var(--navy-900);">
+          <div class="mv-card__label"
+            style="color: var(--navy-900); border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 10px; font-weight: 700;">
+            Evangelism & Missions</div>
+          <p class="mv-card__text">Actively mobilizing students for local and global missionary work, outreaches, and
+            soul-winning campaigns.</p>
+        </div>
+
+        <div class="mv-card mv-card--mission"
+          style="background: var(--gray-50); color: var(--navy-900); border: 1px solid var(--gray-200);">
+          <h3 class="mv-card__title"
+            style="color: var(--navy-900); border-bottom: 1px solid var(--gray-200); padding-bottom: 10px;">Professional
+            Impact</h3>
+          <p class="mv-card__text" style="color: var(--gray-600);">Equipping young adults to be ethical, Christ-like
+            leaders and agents of positive change in corporate, academic, and civic sectors.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHAT WE OFFER ===== -->
+  <section class="section" style="background: var(--gray-50); padding: var(--space-4xl) 0;">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: var(--space-3xl);">
+        <h2 style="font-size: 2rem; font-family: var(--font-serif);">What PENSA Offers</h2>
+        <p style="color: var(--gray-500);">Empowering our members through spiritual, professional, and missional
+          initiatives.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-xl);">
+
+        <div
+          style="background: white; padding: var(--space-xl); border-radius: var(--radius-lg); box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform var(--transition-fast);"
+          onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div style="font-size: 2.5rem; margin-bottom: var(--space-sm);">🙏</div>
+          <h3 style="margin-bottom: var(--space-xs);">Fellowship & Mentorship</h3>
+          <p style="color: var(--gray-500); font-size: 0.95rem; line-height: 1.6;">Engage in regular campus meetings,
+            powerful prayer gatherings, and deep Bible studies to grow spiritually and find godly mentors.</p>
+        </div>
+
+        <div
+          style="background: white; padding: var(--space-xl); border-radius: var(--radius-lg); box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform var(--transition-fast);"
+          onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div style="font-size: 2.5rem; margin-bottom: var(--space-sm);">💼</div>
+          <h3 style="margin-bottom: var(--space-xs);">Professional Guild (PeSPG)</h3>
+          <p style="color: var(--gray-500); font-size: 0.95rem; line-height: 1.6;">Dedicated mentorship for students and
+            fresh graduates, connecting young professionals with corporate entities to positively influence the
+            workplace.</p>
+        </div>
+
+        <div
+          style="background: white; padding: var(--space-xl); border-radius: var(--radius-lg); box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform var(--transition-fast);"
+          onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div style="font-size: 2.5rem; margin-bottom: var(--space-sm);">🌍</div>
+          <h3 style="margin-bottom: var(--space-xs);">The "PENSA Force"</h3>
+          <p style="color: var(--gray-500); font-size: 0.95rem; line-height: 1.6;">Join our dynamic volunteer
+            mobilization team for groundbreaking global mission trips, outreaches, and community development programs.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TIMELINE ===== -->
+  <section class="timeline section" id="journey">
+    <div class="container">
+      <div class="timeline__header">
+        <h2 class="timeline__title">Our Journey & Focus</h2>
+        <p class="timeline__subtitle">How PENSA is transforming faith, academia, and society.</p>
+      </div>
+      <div class="timeline__track">
+        <!-- Item 1 -->
+        <div class="timeline__item">
+          <div class="timeline__dot"></div>
+          <div class="timeline__card">
+            <h4 class="timeline__card-title">Building the Foundation</h4>
+            <p class="timeline__card-text">PENSA serves as the dynamic campus ministry of The Church of Pentecost,
+              dedicated to raising spiritually sound and academically strong individuals.</p>
+          </div>
+        </div>
+        <!-- Item 2 -->
+        <div class="timeline__item">
+          <div class="timeline__dot"></div>
+          <div class="timeline__card">
+            <h4 class="timeline__card-title">Discipleship & Missions</h4>
+            <p class="timeline__card-text">Providing a supportive environment for students on campus while mobilizing
+              the "PENSA Force" for local and global missionary work.</p>
+          </div>
+        </div>
+        <!-- Item 3 -->
+        <div class="timeline__item">
+          <div class="timeline__dot"></div>
+          <div class="timeline__card">
+            <h4 class="timeline__card-title">Professional Impact (PeSPG)</h4>
+            <p class="timeline__card-text">Connecting young professionals and fresh graduates with corporate entities to
+              equip them as ethical, Christ-like leaders in the workplace.</p>
+          </div>
+        </div>
+        <!-- Item 4 -->
+        <div class="timeline__item">
+          <div class="timeline__dot"></div>
+          <div class="timeline__card">
+            <h4 class="timeline__card-title">Possessing the Nations</h4>
+            <p class="timeline__card-text">With a massive presence across over 380 academic institutions in Ghana alone,
+              we bridge the gap between faith, academia, and society.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ===== COMMUNITY LIFE GALLERY ===== -->
+  <!-- <section class="gallery section" id="gallery">
+    <div class="container">
+      <div class="gallery__header">
+        <div>
+          <h2 class="gallery__title">Community Life</h2>
+          <p class="gallery__subtitle">Glimpses of fellowship, worship, and service.</p>
+        </div>
+        <a href="#" class="gallery__view-all">View All →</a>
+      </div>
+      <div class="gallery__grid">
+        <div class="gallery__item">
+          UPDATE IMAGE HERE -->
+  <!-- <img src="images/IMG_0090.jpg" alt="Worship service">
+        </div> -->
+  <!-- <div class="gallery__item"> -->
+  <!-- UPDATE IMAGE HERE -->
+  <!-- <img src="images/_MG_9897.jpg" alt="Choir performance">   </div> -->
+  <!-- <div class="gallery__item"> -->
+  <!-- UPDATE IMAGE HERE -->
+  <!-- <img src="images/IMG_8754.JPG" alt="Bible study">
+        </div> -->
+  <!-- <div class="gallery__item"> -->
+  <!-- UPDATE IMAGE HERE -->
+  <!-- <img src="images/_MG_9781.jpg" alt="Community outreach"> -->
+  <!-- </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__logo"><!-- UPDATE IMAGE HERE --> <img src="images/logo.jpg" alt="PENSA-UMaT Logo"
+              class="footer__logo-img">PENSA–UMaT</div>
+          <p class="footer__tagline">Raising Godly Leaders for National Development. Join our vibrant community of faith
+            on campus.</p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Twitter">𝕏</a>
+            <a href="#" class="footer__social-link" aria-label="Instagram">◎</a>
+            <a href="#" class="footer__social-link" aria-label="Facebook">f</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">Quick Links</h4>
+          <div class="footer__links">
+            <a href="index.html" class="footer__link">Home</a>
+            <a href="sermons.html" class="footer__link">Sermons</a>
+            <a href="contact.html" class="footer__link">Contact</a>
+            <a href="departments.html" class="footer__link">Departments</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">Location</h4>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon">📍</span>
+            <span>University of Mines and Technology, Tarkwa, Western Region, Ghana</span>
+          </div>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon">✉️</span>
+            <span>info@pensaumat.org</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        © 2024 PENSA-UMaT. Member of the UMaT Community.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+
+  <!-- ===== AUTH MODAL ===== -->
+  <div class="modal-overlay auth-modal" id="authModal">
+    <div class="modal">
+      <button class="modal__close" aria-label="Close">✕</button>
+      <h3 class="modal__title" style="margin-bottom: 4px;">Welcome to PENSA–UMaT</h3>
+      <p class="modal__subtitle">Christ in You — The Hope of Glory</p>
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="signin">Sign In</button>
+        <button class="auth-tab" data-tab="register">Create Account</button>
+      </div>
+      <div class="auth-panel active" id="signinPanel">
+        <form id="signinForm">
+          <div class="form-group">
+            <label for="signinEmail">Email Address</label>
+            <input type="email" id="signinEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="signinPassword">Password</label>
+            <div class="password-field">
+              <input type="password" id="signinPassword" placeholder="Enter your password" required>
+              <span class="password-toggle">👁</span>
+            </div>
+          </div>
+          <div class="auth-options">
+            <label><input type="checkbox"> Remember me</label>
+            <a href="#">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn--dark btn--block">Sign In →</button>
+        </form>
+      </div>
+      <div class="auth-panel" id="registerPanel">
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="registerName">Full Name</label>
+            <input type="text" id="registerName" placeholder="Enter your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">Email Address</label>
+            <input type="email" id="registerEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <div class="password-field">
+              <input type="password" id="registerPassword" placeholder="Create a password (min 6 chars)" required
+                minlength="6">
+              <span class="password-toggle">👁</span>
+            </div>
+            <div class="password-strength">
+              <div class="password-strength__bar"></div>
+              <div class="password-strength__bar"></div>
+              <div class="password-strength__bar"></div>
+              <div class="password-strength__bar"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="registerConfirmPassword">Confirm Password</label>
+            <div class="password-field">
+              <input type="password" id="registerConfirmPassword" placeholder="Confirm your password" required>
+              <span class="password-toggle">👁</span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block">Create Account →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="js/auth.js"></script>
+</body>
+
+</html>
