@@ -4,7 +4,6 @@
    =================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initPageLoad();
   initNavigation();
   initNavDropdown();
   initActivePageHighlight();
@@ -17,11 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initJoinDepartment();
   initJoinFamily();
   initScrollAnimations();
-  initHeroParallax();
-  initScrollIndicator();
-  initBackToTop();
-  initStatCounters();
-  initSectionHeaderAccents();
 });
 
 /* =====================================================
@@ -544,37 +538,9 @@ function showToast(message) {
 }
 
 /* =====================================================
-   SCROLL ANIMATIONS (Enhanced with stagger)
+   SCROLL ANIMATIONS
    ===================================================== */
 function initScrollAnimations() {
-  // Staggered card grid reveals
-  const cardGrids = document.querySelectorAll('.community-life__grid, .sermon-grid__cards, .departments-grid__cards, .family-grid__cards, .leadership-page__grid, .birthdays-week__cards, .later-month__list');
-
-  cardGrids.forEach(grid => {
-    const gridObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const children = entry.target.children;
-          Array.from(children).forEach((child, index) => {
-            child.style.opacity = '0';
-            child.style.transform = 'translateY(25px)';
-            child.style.transition = `opacity 0.6s var(--ease-smooth) ${index * 0.12}s, transform 0.6s var(--ease-smooth) ${index * 0.12}s`;
-            requestAnimationFrame(() => {
-              requestAnimationFrame(() => {
-                child.style.opacity = '1';
-                child.style.transform = 'translateY(0)';
-                child.classList.add('animate-in');
-              });
-            });
-          });
-          gridObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    gridObserver.observe(grid);
-  });
-
-  // Individual element reveals (non-grid items)
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -584,150 +550,12 @@ function initScrollAnimations() {
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-  document.querySelectorAll('.timeline__item, .mv-card, .scripture-quote, .missing-birthday, .featured-sermon__content, .latest-sermon__content, .quote-section').forEach(el => {
+  document.querySelectorAll('.event-card, .dept-card, .sermon-card, .birthday-card, .leader-card, .leader-card-lg, .family-card, .timeline__item, .mv-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s var(--ease-smooth), transform 0.6s var(--ease-smooth)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
   });
-}
-
-/* =====================================================
-   PAGE LOAD ANIMATION
-   ===================================================== */
-function initPageLoad() {
-  document.body.classList.add('page-loading');
-  window.addEventListener('load', () => {
-    requestAnimationFrame(() => {
-      document.body.classList.remove('page-loading');
-      document.body.classList.add('page-loaded');
-    });
-  });
-}
-
-/* =====================================================
-   HERO PARALLAX
-   ===================================================== */
-function initHeroParallax() {
-  const hero = document.querySelector('.hero');
-  if (!hero) return;
-
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        const scrolled = window.scrollY;
-        const heroHeight = hero.offsetHeight;
-        if (scrolled <= heroHeight) {
-          const parallaxVal = scrolled * 0.35;
-          hero.style.backgroundPositionY = `calc(center + ${parallaxVal}px)`;
-        }
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-}
-
-/* =====================================================
-   SCROLL INDICATOR (Fade out on scroll)
-   ===================================================== */
-function initScrollIndicator() {
-  const indicator = document.querySelector('.hero__scroll-indicator');
-  if (!indicator) return;
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-      indicator.classList.add('hidden');
-    } else {
-      indicator.classList.remove('hidden');
-    }
-  }, { passive: true });
-}
-
-/* =====================================================
-   BACK TO TOP BUTTON
-   ===================================================== */
-function initBackToTop() {
-  // Create button dynamically
-  const btn = document.createElement('button');
-  btn.className = 'back-to-top';
-  btn.setAttribute('aria-label', 'Back to top');
-  btn.innerHTML = '<span class="back-to-top__arrow"></span>';
-  document.body.appendChild(btn);
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-      btn.classList.add('visible');
-    } else {
-      btn.classList.remove('visible');
-    }
-  }, { passive: true });
-
-  btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
-
-/* =====================================================
-   ANIMATED STAT COUNTERS
-   ===================================================== */
-function initStatCounters() {
-  const statElements = document.querySelectorAll('.family-card__stat-value');
-  if (!statElements.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const text = el.textContent.trim();
-        const match = text.match(/^(\d+)(\+?)$/);
-        if (match) {
-          const target = parseInt(match[1]);
-          const suffix = match[2] || '';
-          animateCounter(el, 0, target, suffix, 1200);
-        }
-        observer.unobserve(el);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  statElements.forEach(el => observer.observe(el));
-}
-
-function animateCounter(el, start, end, suffix, duration) {
-  const startTime = performance.now();
-  const step = (currentTime) => {
-    const elapsed = currentTime - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    // Ease-out cubic
-    const eased = 1 - Math.pow(1 - progress, 3);
-    const current = Math.floor(start + (end - start) * eased);
-    el.textContent = current + suffix;
-    if (progress < 1) {
-      requestAnimationFrame(step);
-    }
-  };
-  requestAnimationFrame(step);
-}
-
-/* =====================================================
-   SECTION HEADER ACCENT ANIMATION
-   ===================================================== */
-function initSectionHeaderAccents() {
-  const headers = document.querySelectorAll('.community-life__title, .timeline__title, .leadership__title, .family-grid__title, .leadership-page__title');
-  if (!headers.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  headers.forEach(el => observer.observe(el));
 }
 
 // CSS class for animation trigger
