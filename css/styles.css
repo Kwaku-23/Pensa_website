@@ -214,9 +214,6 @@ textarea {
   width: 42px;
   border-radius: var(--radius-full);
   object-fit: cover;
-  background-color: var(--white);
-  padding: 3px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   transition: transform var(--transition-fast);
 }
 
