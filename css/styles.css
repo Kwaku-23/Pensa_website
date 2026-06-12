@@ -524,14 +524,14 @@ textarea {
 }
 
 .hero--departments {
-  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../The_executives_of_the_church.jpg');
+  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../images/The_executives_of_the_church.jpg');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
 }
 
 .hero--events {
-  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../Pensice.jpg');
+  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../images/Pensice.jpg');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
@@ -552,7 +552,7 @@ textarea {
 }
 
 .hero--leadership {
-  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../LCC_executives.jpg');
+  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../images/LCC_executives.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
