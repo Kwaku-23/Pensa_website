@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenge'26 Gallery | PENSA-UMaT</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <style>
+    .gallery-header {
+      padding: var(--space-4xl) 0 var(--space-xl);
+      text-align: center;
+      background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('Challenge/IMG_0140.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+    .gallery-header h1 {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      margin-bottom: var(--space-sm);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-md);
+      padding: var(--space-2xl) 0 var(--space-4xl);
+    }
+    .gallery-img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      transition: transform var(--transition-fast);
+      cursor: pointer;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .gallery-img:hover {
+      transform: scale(1.03);
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: var(--space-lg);
+      color: white;
+      text-decoration: none;
+      border: 1px solid white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: all var(--transition-fast);
+    }
+    .back-btn:hover {
+      background: white;
+      color: var(--navy-900);
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar__logo"><img src="images/logo.png" alt="PENSA-UMaT Logo" class="navbar__logo-img">PENSA–UMaT</a>
+      <div class="navbar__links" id="navLinks">
+        <a href="index.html" class="navbar__link">Home</a>
+        <div class="navbar__dropdown">
+          <button class="navbar__dropdown-toggle" aria-expanded="false">
+            About <span class="navbar__dropdown-arrow">▼</span>
+          </button>
+          <div class="navbar__dropdown-menu">
+            <a href="about.html" class="navbar__dropdown-item">About Us</a>
+            <a href="leadership.html" class="navbar__dropdown-item">Leadership</a>
+            <a href="family.html" class="navbar__dropdown-item">Family / Zones</a>
+          </div>
+        </div>
+        <a href="sermons.html" class="navbar__link">Sermons</a>
+        <a href="events.html" class="navbar__link navbar__link--active">Events</a>
+        <a href="departments.html" class="navbar__link">Departments</a>
+        <a href="give.html" class="navbar__link">Give</a>
+        <a href="contact.html" class="navbar__link">Contact</a>
+        <a href="birthdays.html" class="navbar__link">Birthdays</a>
+        <a href="#" class="navbar__cta" id="signInBtn" onclick="openAuthModal()">Sign In</a>
+      </div>
+      <button class="navbar__hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <header class="gallery-header">
+    <div class="container">
+      <h1>Challenge'26 Gallery</h1>
+      <p>Memories from our intensive and life-transforming retreat.</p>
+      <a href="events.html" class="back-btn">← Back to Events</a>
+    </div>
+  </header>
+
+  <section class="container gallery-grid">
+    <img src="Challenge/056A8260.jpg" class="gallery-img" alt="Gallery Image">
+    <img src="Challenge/056A8371.jpg" class="gallery-img" alt="Gallery Image">
+    <img src="Challenge/056A8404.JPG" class="gallery-img" alt="Gallery Image">
+    <img src="Challenge/056A8408.JPG" class="gallery-img" alt="Gallery Image">
+    <img src="Challenge/IMG_0106-Enhanced-NR.jpg" class="gallery-img" alt="Gallery Image">
+    <img src="Challenge/IMG_0140.jpg" class="gallery-img" alt="Gallery Image">
+    <img src="Challenge/IMG_0147.jpg" class="gallery-img" alt="Gallery Image">
+    <img src="Challenge/IMG_0165.jpg" class="gallery-img" alt="Gallery Image">
+    <img src="Challenge/IMG_0208.jpg" class="gallery-img" alt="Gallery Image">
+    <img src="Challenge/IMG_0228.jpg" class="gallery-img" alt="Gallery Image">
+    <img src="Challenge/IMG_0359.JPG" class="gallery-img" alt="Gallery Image">
+    <img src="Challenge/IMG_0366.JPG" class="gallery-img" alt="Gallery Image">
+    <img src="Challenge/IMG_0411.JPG" class="gallery-img" alt="Gallery Image">
+    <img src="Challenge/IMG_8380.JPG" class="gallery-img" alt="Gallery Image">
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__bottom" style="text-align: center; border-top: none; padding-top: 0;">
+        © 2024 PENSA-UMaT. Member of the UMaT Community.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -496,7 +496,7 @@ textarea {
 
 /* CHANGED: .hero--home no longer needs its own sizing since .hero now has it */
 .hero--home {
-  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../images/_MG_9756.jpg');
+  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../images/Pastor.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -505,7 +505,7 @@ textarea {
 .hero--about {
   background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../images/_MG_9889.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
 }
 
@@ -524,16 +524,16 @@ textarea {
 }
 
 .hero--departments {
-  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../images/IMG_8476.jpg');
+  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../The_executives_of_the_church.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
 }
 
 .hero--events {
-  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../images/IMG_8837.JPG');
+  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../Pensice.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
 }
 
@@ -559,9 +559,9 @@ textarea {
 }
 
 .hero--sermons {
-  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../images/IMG_0090.jpg');
+  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../images/Pastor.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
 }
 
@@ -750,9 +750,9 @@ textarea {
 }
 
 .quote-section__avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-full);
+  width: 80px;
+  height: 80px;
+  border-radius: 1820px;
   object-fit: cover;
 }
 
@@ -1721,6 +1721,7 @@ textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   transition: transform var(--transition-slow);
 }
 
