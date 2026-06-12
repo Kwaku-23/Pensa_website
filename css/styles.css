@@ -552,7 +552,7 @@ textarea {
 }
 
 .hero--leadership {
-  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../images/_MG_9781.jpg');
+  background: linear-gradient(to bottom, rgba(16, 20, 60, 0.82), rgba(16, 20, 60, 0.90)), url('../LCC_executives.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -2531,10 +2531,11 @@ textarea {
 }
 
 .leader-card-lg__photo {
-  width: 140px;
-  height: 140px;
-  border-radius: var(--radius-full);
+  width: 180px;
+  height: 220px;
+  border-radius: var(--radius-lg);
   object-fit: cover;
+  object-position: top;
   margin: 0 auto var(--space-lg);
   border: 4px solid var(--gold-500);
   box-shadow: 0 4px 20px rgba(212, 160, 23, 0.25);
