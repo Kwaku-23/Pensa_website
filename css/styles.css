@@ -3414,6 +3414,13 @@ textarea {
     max-height: 300px;
   }
 
+  .hero {
+    min-height: 50vh;
+    padding-top: calc(var(--nav-height) + var(--space-2xl));
+    padding-bottom: var(--space-3xl);
+    background-position: center top;
+  }
+
   .hero__title {
     font-size: 2.2rem;
   }
