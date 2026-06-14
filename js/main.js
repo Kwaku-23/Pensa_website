@@ -1,13 +1,14 @@
 /* ===================================================
    PENSA-UMaT Church Website — Main JavaScript
    "Christ in You — The Hope of Glory"
+   ✦ Premium Interactive Redesign
    =================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initNavDropdown();
   initActivePageHighlight();
-  initNavbarScroll(); /* ADDED — handles transparent→solid navbar on scroll */
+  initNavbarScroll();
   initModals();
   initVideoModal();
   initSermonFilters();
@@ -16,22 +17,21 @@ document.addEventListener('DOMContentLoaded', () => {
   initJoinDepartment();
   initJoinFamily();
   initScrollAnimations();
+  initParticles();
+  initCounterAnimation();
+  initTiltEffect();
+  initRippleEffect();
+  initTypingEffect();
 });
 
 /* =====================================================
    NAVBAR SCROLL BEHAVIOR
-   ADDED — toggles .navbar--scrolled class based on scroll position.
-   When at the top of the page, navbar is transparent and overlays the hero.
-   After scrolling past the hero, navbar gets a solid white background.
-   Also forces solid bg when mobile hamburger menu is open.
    ===================================================== */
 function initNavbarScroll() {
   const navbar = document.getElementById('navbar');
   if (!navbar) return;
 
   const handleScroll = () => {
-    const hero = document.querySelector('.hero');
-    /* Scroll threshold: switch to solid bg after scrolling 50px */
     const scrollThreshold = 50;
 
     if (window.scrollY > scrollThreshold) {
@@ -41,19 +41,16 @@ function initNavbarScroll() {
     }
   };
 
-  /* Run once on load in case the page loads scrolled down */
   handleScroll();
-
   window.addEventListener('scroll', handleScroll, { passive: true });
 
-  /* ADDED: also force solid navbar when mobile menu is toggled open */
   const hamburger = document.getElementById('hamburger');
   if (hamburger) {
     const observer = new MutationObserver(() => {
       if (hamburger.classList.contains('active')) {
         navbar.classList.add('navbar--scrolled');
       } else {
-        handleScroll(); /* Re-evaluate based on scroll position */
+        handleScroll();
       }
     });
     observer.observe(hamburger, { attributes: true, attributeFilter: ['class'] });
@@ -485,7 +482,7 @@ function showConfetti() {
   container.className = 'confetti-container';
   document.body.appendChild(container);
 
-  const colors = ['#d4a017', '#e8b830', '#0d1f3c', '#ef4444', '#22c55e', '#3b82f6', '#f59e0b', '#ec4899'];
+  const colors = ['#f5d800', '#ffe234', '#b51c2e', '#10143c', '#22c55e', '#3b82f6', '#f59e0b', '#ec4899'];
   const shapes = ['square', 'circle'];
 
   for (let i = 0; i < 80; i++) {
@@ -538,27 +535,226 @@ function showToast(message) {
 }
 
 /* =====================================================
-   SCROLL ANIMATIONS
+   SCROLL ANIMATIONS (Enhanced with stagger)
    ===================================================== */
 function initScrollAnimations() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
+        // Stagger delay for grid items
+        const parent = entry.target.parentElement;
+        if (parent) {
+          const siblings = Array.from(parent.children);
+          const index = siblings.indexOf(entry.target);
+          entry.target.style.transitionDelay = `${index * 0.1}s`;
+        }
         entry.target.classList.add('animate-in');
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-  document.querySelectorAll('.event-card, .dept-card, .sermon-card, .birthday-card, .leader-card, .leader-card-lg, .family-card, .timeline__item, .mv-card').forEach(el => {
+  document.querySelectorAll('.event-card, .dept-card, .sermon-card, .birthday-card, .leader-card, .leader-card-lg, .family-card, .timeline__item, .mv-card, .stat-item').forEach(el => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
     observer.observe(el);
   });
 }
 
-// CSS class for animation trigger
+/* =====================================================
+   PARTICLE SYSTEM (Hero Background)
+   ===================================================== */
+function initParticles() {
+  const container = document.getElementById('heroParticles');
+  if (!container) return;
+
+  const colors = [
+    'rgba(245, 216, 0, 0.4)',
+    'rgba(245, 216, 0, 0.2)',
+    'rgba(181, 28, 46, 0.25)',
+    'rgba(255, 255, 255, 0.15)',
+    'rgba(255, 255, 255, 0.08)',
+    'rgba(245, 216, 0, 0.15)',
+  ];
+
+  function createParticle() {
+    const particle = document.createElement('div');
+    const size = 2 + Math.random() * 6;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const startX = Math.random() * 100;
+    const startY = Math.random() * 100;
+    const dx = (Math.random() - 0.5) * 150;
+    const dy = (Math.random() - 0.5) * 150;
+    const duration = 6 + Math.random() * 8;
+    const delay = Math.random() * 4;
+
+    particle.style.cssText = `
+      position: absolute;
+      width: ${size}px;
+      height: ${size}px;
+      background: ${color};
+      border-radius: 50%;
+      left: ${startX}%;
+      top: ${startY}%;
+      --dx: ${dx}px;
+      --dy: ${dy}px;
+      animation: particle-drift ${duration}s ease-in-out ${delay}s infinite;
+      pointer-events: none;
+    `;
+
+    container.appendChild(particle);
+  }
+
+  // Create particles
+  const particleCount = window.innerWidth < 768 ? 20 : 40;
+  for (let i = 0; i < particleCount; i++) {
+    createParticle();
+  }
+}
+
+/* =====================================================
+   COUNTER ANIMATION (Stats Section)
+   ===================================================== */
+function initCounterAnimation() {
+  const counters = document.querySelectorAll('[data-count]');
+  if (counters.length === 0) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.count, 10);
+        const duration = 2000; // 2 seconds
+        const startTime = performance.now();
+
+        function updateCount(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+
+          // Ease out cubic
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.round(eased * target);
+
+          el.textContent = current + '+';
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCount);
+          }
+        }
+
+        requestAnimationFrame(updateCount);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  counters.forEach(counter => observer.observe(counter));
+}
+
+/* =====================================================
+   TILT EFFECT (Cards)
+   ===================================================== */
+function initTiltEffect() {
+  // Only enable on non-touch devices
+  if ('ontouchstart' in window) return;
+
+  const cards = document.querySelectorAll('.event-card, .sermon-card, .dept-card, .family-card, .leader-card-lg, .stat-item');
+
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = (y - centerY) / centerY * -3; // max 3 degrees
+      const rotateY = (x - centerX) / centerX * 3;
+
+      card.style.transform = `translateY(-8px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.transition = 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+      setTimeout(() => {
+        card.style.transition = '';
+      }, 400);
+    });
+  });
+}
+
+/* =====================================================
+   RIPPLE EFFECT (Buttons)
+   ===================================================== */
+function initRippleEffect() {
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      ripple.style.width = ripple.style.height = `${Math.max(rect.width, rect.height) * 0.5}px`;
+
+      btn.appendChild(ripple);
+
+      ripple.addEventListener('animationend', () => ripple.remove());
+    });
+  });
+}
+
+/* =====================================================
+   TYPING EFFECT (Hero Subtitle)
+   ===================================================== */
+function initTypingEffect() {
+  const subtitle = document.getElementById('heroSubtitle');
+  if (!subtitle) return;
+
+  const fullText = subtitle.textContent.trim();
+  const italic = subtitle.querySelector('i');
+  const text = italic ? italic.textContent.trim() : fullText;
+
+  // Clear the text initially
+  if (italic) {
+    italic.textContent = '';
+    italic.style.borderRight = '2px solid var(--gold-500)';
+    italic.style.paddingRight = '2px';
+    italic.style.animation = 'typing-cursor 1s step-end infinite';
+  }
+
+  let i = 0;
+  const speed = 50; // ms per character
+
+  function typeChar() {
+    if (i < text.length) {
+      if (italic) {
+        italic.textContent += text.charAt(i);
+      }
+      i++;
+      setTimeout(typeChar, speed);
+    } else {
+      // Remove cursor after typing completes
+      setTimeout(() => {
+        if (italic) {
+          italic.style.borderRight = 'none';
+          italic.style.animation = 'none';
+        }
+      }, 1500);
+    }
+  }
+
+  // Start typing after a brief delay
+  setTimeout(typeChar, 800);
+}
+
+/* =====================================================
+   CSS INJECTION FOR ANIMATIONS
+   ===================================================== */
 const style = document.createElement('style');
 style.textContent = `
   .animate-in {
