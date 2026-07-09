@@ -1,0 +1,221 @@
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 60px;
+  }
+
+  .navbar__links {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    background: rgba(16, 20, 60, 0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: var(--space-xl);
+    border-bottom: 1px solid rgba(245, 216, 0, 0.1);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform var(--transition-base), opacity var(--transition-base), visibility var(--transition-base);
+  }
+
+  /* Mobile menu dark theme */
+  .navbar__links .navbar__link {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .navbar__links .navbar__link:hover,
+  .navbar__links .navbar__link--active {
+    color: var(--gold-400);
+  }
+
+  .navbar__links .navbar__link--active::after {
+    background: var(--gradient-gold);
+  }
+
+  .navbar__links .navbar__dropdown-toggle {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .navbar__links .navbar__dropdown-toggle:hover {
+    color: var(--gold-400);
+  }
+
+  .navbar__links .navbar__cta {
+    background: linear-gradient(135deg, var(--gold-500), var(--gold-600));
+    color: var(--navy-900);
+    border: none;
+  }
+
+  .navbar__links .navbar__cta:hover {
+    background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+  }
+
+  .navbar__links.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  /* Dropdown mobile styles */
+  .navbar__dropdown {
+    width: 100%;
+  }
+
+  .navbar__dropdown-toggle {
+    width: 100%;
+    justify-content: space-between;
+    padding: var(--space-xs) 0;
+  }
+
+  .navbar__dropdown-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    border-left: 2px solid var(--gold-500);
+    border-radius: 0;
+    margin-top: 0;
+    margin-left: var(--space-md);
+    padding: var(--space-xs) 0;
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    overflow: hidden;
+    transform: none;
+    transition: max-height var(--transition-base), opacity var(--transition-base), visibility var(--transition-base);
+    background: transparent;
+    backdrop-filter: none;
+  }
+
+  .navbar__dropdown-menu::before {
+    display: none;
+  }
+
+  .navbar__dropdown:hover .navbar__dropdown-menu {
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+  }
+
+  .navbar__dropdown.open .navbar__dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    max-height: 300px;
+  }
+
+
+  .hero__title {
+    font-size: 2.2rem;
+  }
+
+  .hero__decoration {
+    display: none;
+  }
+
+  .latest-sermon__content {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-sermon__content {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-sermon__info {
+    padding: var(--space-xl);
+  }
+
+  .community-life__grid,
+  .sermon-grid__cards,
+  .departments-grid__cards,
+  .family-grid__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .leadership-page__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .mission-vision__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .birthdays-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .birthdays-week__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .sermon-filters__bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group select,
+  .filter-group input {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .hero--birthdays .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero--birthdays .hero__title {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero--birthdays .hero__subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .leadership__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .timeline__item:nth-child(odd),
+  .timeline__item:nth-child(even) {
+    padding-right: 0;
+    padding-left: 55px;
+    justify-content: flex-start;
+  }
+
+  .timeline__track::before {
+    left: 15px;
+  }
+
+  .timeline__dot {
+    left: 15px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .stat-item {
+    padding: var(--space-lg);
+  }
+
+  .stat-item__number {
+    font-size: 2rem;
+  }
+}

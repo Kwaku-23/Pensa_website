@@ -1,21 +1,41 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Home() {
+  const [subtitleText, setSubtitleText] = useState("");
+  const fullText = "Christ In You, The Hope of Glory";
+
+  useEffect(() => {
+    let i = 0;
+    const speed = 50;
+    const interval = setInterval(() => {
+      setSubtitleText(fullText.substring(0, i + 1));
+      i++;
+      if (i >= fullText.length) {
+        clearInterval(interval);
+      }
+    }, speed);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       {/* ===== HERO ===== */}
       <section className="hero hero--home" id="hero">
-        {/* Floating decorative elements */}
-        <div className="hero__decoration hero__decoration--circle"></div>
-        <div className="hero__decoration hero__decoration--circle-2"></div>
-        <div className="hero__decoration hero__decoration--dots"></div>
-        <div className="hero__decoration hero__decoration--line"></div>
         {/* Particle canvas */}
         <div className="hero__particles" id="heroParticles"></div>
         <div className="container">
           <h1 className="hero__title">Welcome to PENSA-UMaT</h1>
-          <p className="hero__subtitle" id="heroSubtitle"><i>Christ In You, The Hope of Glory</i></p>
+          <p className="hero__subtitle" id="heroSubtitle">
+            <i style={{ 
+              borderRight: subtitleText.length < fullText.length ? '2px solid var(--gold-500)' : 'none', 
+              paddingRight: '2px',
+              animation: subtitleText.length < fullText.length ? 'typing-cursor 1s step-end infinite' : 'none'
+            }}>
+              {subtitleText}
+            </i>
+          </p>
           <div className="hero__actions">
             <Link to="/about" className="btn btn--primary">Who we are</Link>
             <Link to="/family" className="btn btn--outline">Join our community</Link>

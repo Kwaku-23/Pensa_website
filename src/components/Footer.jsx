@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { FaWhatsapp, FaFacebookF, FaInstagram, FaXTwitter, FaTiktok } from 'react-icons/fa6';
 
 export default function Footer() {
   return (
@@ -10,11 +11,13 @@ export default function Footer() {
               <img src="/images/logo.png" alt="PENSA-UMaT Logo" className="footer__logo-img" />
               PENSA–UMaT
             </div>
-            <p className="footer__tagline">Equipping students to be Christ-like leaders in academia and beyond.</p>
+            <p className="footer__tagline"> <i>Follow us on Our Social Media</i> </p>
             <div className="footer__social">
-              <a href="#" className="footer__social-link" aria-label="Twitter">𝕏</a>
-              <a href="#" className="footer__social-link" aria-label="Share">↗</a>
-              <a href="#" className="footer__social-link" aria-label="Instagram">◎</a>
+              <a href="#" className="footer__social-link" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><FaWhatsapp size={20} /></a>
+              <a href="https://web.facebook.com/PENSAUMaT" className="footer__social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><FaFacebookF size={20} /></a>
+              <a href="https://www.instagram.com/pensaumat/" className="footer__social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><FaInstagram size={20} /></a>
+              <a href="https://x.com/_pensa_umat_?s=11" className="footer__social-link" aria-label="X (Twitter)" target="_blank" rel="noopener noreferrer"><FaXTwitter size={20} /></a>
+              <a href="https://www.tiktok.com/@pensa_umat?_r=1&_t=ZS-97tFgrTnqho" className="footer__social-link" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><FaTiktok size={20} /></a>
             </div>
           </div>
           <div>
@@ -30,7 +33,7 @@ export default function Footer() {
             <h4 className="footer__heading">Location</h4>
             <div className="footer__contact-item">
               <span className="footer__contact-icon">📍</span>
-              <span>University of Mines and Technology, Tarkwa, Ghana</span>
+              <span>Pentecost UMaT Worship Center</span>
             </div>
             <div className="footer__contact-item">
               <span className="footer__contact-icon">📞</span>
