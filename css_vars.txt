@@ -1,0 +1,90 @@
+/* ===================================================
+   PENSA-UMaT Church Website Master Stylesheet
+   =================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* ----- CSS Custom Properties (Design Tokens) ----- */
+:root {
+  --navy-900: #0a0d27;
+  --navy-800: #10143c;
+  --navy-700: #1a1f4e;
+  --navy-600: #252a62;
+  --navy-500: #303878;
+  --navy-400: #3d478f;
+
+  --gold-600: #d4a017;
+  --gold-500: #f5d800;
+  --gold-400: #ffe234;
+  --gold-300: #ffea66;
+  --gold-200: #fff3a0;
+  --gold-100: #fffbe6;
+
+  --red-700: #7f1420;
+  --red-600: #961726;
+  --red-500: #b51c2e;
+  --red-400: #dc2626;
+  --red-300: #f87171;
+  --red-100: #fee2e2;
+
+  --white: #ffffff;
+  --gray-50: #f8f9fa;
+  --gray-100: #f1f3f5;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --text-dark: #111827;
+
+  --teal-500: #0d9488;
+  --teal-400: #2dd4bf;
+  --teal-100: #ccfbf1;
+
+  --peach-100: #ffecd2;
+  --peach-300: #fdba74;
+
+  --gradient-brand: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-800) 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(10, 13, 39, 0.95) 0%, rgba(16, 20, 60, 0.9) 100%);
+  --gradient-gold: linear-gradient(135deg, var(--gold-500), #eab308);
+  --gradient-card: linear-gradient(135deg, var(--white), var(--gray-50));
+  --gradient-accent: linear-gradient(90deg, var(--navy-800), var(--navy-600));
+  --gradient-warm: var(--white);
+  --gradient-footer: var(--navy-900);
+
+  --glow-gold: none;
+  --glow-red: none;
+  --glow-navy: none;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 50%;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-colored: var(--shadow-md);
+  --shadow-card-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+
+  --transition-fast: 150ms ease-out;
+  --transition-base: 250ms ease-out;
+  --transition-slow: 400ms ease-out;
+  --transition-spring: 300ms ease-out;
+}

@@ -1,0 +1,373 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Celebrate the birthdays of our beloved PENSA-UMaT members. Send a prayer, a message, or share in their joy this month.">
+  <title>Community Birthdays | PENSA-UMaT</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar__logo"><!-- UPDATE IMAGE HERE --> <img src="images/logo.png" alt="PENSA-UMaT Logo" class="navbar__logo-img">PENSAΓÇôUMaT</a>
+      <div class="navbar__links" id="navLinks">
+        <a href="index.html" class="navbar__link">Home</a>
+        <div class="navbar__dropdown">
+          <button class="navbar__dropdown-toggle" aria-expanded="false">
+            About <span class="navbar__dropdown-arrow">Γû╝</span>
+          </button>
+          <div class="navbar__dropdown-menu">
+            <a href="about.html" class="navbar__dropdown-item">
+              <span class="navbar__dropdown-item__icon">≡ƒôû</span> About Us
+            </a>
+            <a href="leadership.html" class="navbar__dropdown-item">
+              <span class="navbar__dropdown-item__icon">≡ƒæÑ</span> Leadership
+            </a>
+            <a href="family.html" class="navbar__dropdown-item">
+              <span class="navbar__dropdown-item__icon">≡ƒÅá</span> Family / Zones
+            </a>
+          </div>
+        </div>
+        <a href="sermons.html" class="navbar__link">Sermons</a>
+        <a href="events.html" class="navbar__link">Events</a>
+        <a href="departments.html" class="navbar__link">Departments</a>
+        <a href="give.html" class="navbar__link">Give</a>
+        <a href="contact.html" class="navbar__link">Contact</a>
+        <a href="birthdays.html" class="navbar__link">Birthdays</a>
+        <a href="#" class="navbar__cta" id="signInBtn" onclick="openAuthModal()">Sign In</a>
+      </div>
+      <!-- User Menu (shown when signed in) -->
+      <div class="user-menu" id="userMenu">
+        <button class="user-menu__trigger">
+          <div class="user-menu__avatar">U</div>
+          <span class="user-menu__trigger-name">User</span>
+        </button>
+        <div class="user-menu__dropdown">
+          <div class="user-menu__dropdown-header">
+            <div class="user-menu__dropdown-name">User Name</div>
+            <div class="user-menu__dropdown-email">user@email.com</div>
+          </div>
+          <a href="birthdays.html" class="user-menu__dropdown-item">≡ƒÄé Birthdays</a>
+          <a href="about.html" class="user-menu__dropdown-item">≡ƒæñ My Profile</a>
+          <button class="user-menu__dropdown-item user-menu__dropdown-item--danger" id="signOutBtn">≡ƒÜ¬ Sign Out</button>
+        </div>
+      </div>
+      <button class="navbar__hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero hero--birthdays" id="heroBirthdays">
+    <div class="hero__decoration hero__decoration--circle"></div>
+    <div class="hero__decoration hero__decoration--circle-2"></div>
+    <div class="hero__decoration hero__decoration--dots"></div>
+    <div class="hero__decoration hero__decoration--line"></div>
+    <div class="container">
+      <div class="hero__content">
+        <h1 class="hero__title">Community Birthdays</h1>
+        <p class="hero__subtitle">Join us in celebrating the lives of our beloved members. Send a message, a prayer, or simply share in their joy this month.</p>
+      </div>
+      <div class="hero__icon">≡ƒÄé</div>
+    </div>
+  </section>
+
+  <!-- ===== AUTH GATE (shown when NOT signed in) ===== -->
+  <div id="authGate">
+    <section class="birthdays-section">
+      <div class="container">
+        <div class="auth-gate">
+          <div class="auth-gate__icon">≡ƒöÆ</div>
+          <h2 class="auth-gate__title">Members Only</h2>
+          <p class="auth-gate__desc">The Community Birthdays section is available to registered members. Sign in or create an account to celebrate with your church family.</p>
+          <div class="auth-gate__actions">
+            <button class="btn btn--primary" onclick="openAuthModal()">Sign In</button>
+            <button class="btn btn--outline-dark" onclick="openAuthModal(); setTimeout(() => switchAuthTab('register'), 100);">Create Account</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== BIRTHDAYS CONTENT (shown when signed in) ===== -->
+  <div id="birthdaysContent" style="display: none;">
+  <section class="birthdays-section" id="birthdaysSection">
+    <div class="container">
+      <div class="birthdays-layout">
+        <!-- LEFT: This Week + Later This Month -->
+        <div>
+          <!-- This Week -->
+          <h2 class="birthdays-week__title">≡ƒÄü This Week</h2>
+          <div class="birthdays-week__cards">
+            <!-- Card 1 -->
+            <div class="birthday-card">
+              <div class="birthday-card__photo birthday-card__photo--initial" style="background: linear-gradient(135deg, #d4a017, #e8b830);">K</div>
+              <h3 class="birthday-card__name">Kwame Mensah</h3>
+              <p class="birthday-card__date">Today, Oct 24</p>
+              <span class="birthday-card__role">Prayer Secretary</span>
+              <button class="btn btn--primary btn--block btn--sm" data-celebrate="Kwame Mensah">≡ƒÄë Send Celebration</button>
+            </div>
+            <!-- Card 2 -->
+            <div class="birthday-card">
+              <div class="birthday-card__photo birthday-card__photo--initial" style="background: linear-gradient(135deg, #0d1f3c, #1a3a6e);">A</div>
+              <h3 class="birthday-card__name">Abena Ofori</h3>
+              <p class="birthday-card__date">Tomorrow, Oct 25</p>
+              <span class="birthday-card__role">Choir Member</span>
+              <button class="btn btn--outline-dark btn--block btn--sm" data-message="Abena Ofori">Γ£ë∩╕Å Write Message</button>
+            </div>
+          </div>
+
+          <!-- Later This Month -->
+          <div class="later-month">
+            <h2 class="later-month__title">≡ƒôà Later This Month</h2>
+            <div class="later-month__list">
+              <div class="later-month__item">
+                <div class="later-month__avatar later-month__avatar--d">D</div>
+                <div class="later-month__info">
+                  <div class="later-month__name">Daniel Amoah</div>
+                  <div class="later-month__date">October 28</div>
+                </div>
+                <button class="later-month__action" data-name="Daniel Amoah">Γû╖ Celebrate</button>
+              </div>
+              <div class="later-month__item">
+                <div class="later-month__avatar later-month__avatar--e">E</div>
+                <div class="later-month__info">
+                  <div class="later-month__name">Ebenezer Tetteh</div>
+                  <div class="later-month__date">October 30</div>
+                </div>
+                <button class="later-month__action" data-name="Ebenezer Tetteh">Γû╖ Celebrate</button>
+              </div>
+              <div class="later-month__item">
+                <div class="later-month__avatar later-month__avatar--s">S</div>
+                <div class="later-month__info">
+                  <div class="later-month__name">Sarah Mensah</div>
+                  <div class="later-month__date">October 31</div>
+                </div>
+                <button class="later-month__action" data-name="Sarah Mensah">Γû╖ Celebrate</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Scripture + Missing Birthday -->
+        <div>
+          <!-- Scripture Quote -->
+          <div class="scripture-quote">
+            <div class="scripture-quote__mark">99</div>
+            <p class="scripture-quote__text">"Rejoice with those who rejoice; mourn with those who mourn."</p>
+            <div class="scripture-quote__ref">Romans 12:15</div>
+          </div>
+
+          <!-- Missing a Birthday? -->
+          <div class="missing-birthday">
+            <div class="missing-birthday__icon">≡ƒôï</div>
+            <h3 class="missing-birthday__title">Missing a Birthday?</h3>
+            <p class="missing-birthday__desc">Help us keep our community records updated. Let the secretariat know if your birthday is coming up!</p>
+            <button class="btn btn--outline-dark" id="updateDetailsBtn">Update Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div><!-- /birthdaysContent -->
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__logo"><!-- UPDATE IMAGE HERE --> <img src="images/logo.png" alt="PENSA-UMaT Logo" class="footer__logo-img">PENSAΓÇôUMaT</div>
+          <p class="footer__tagline">Empowering students through Christ. A family of believers committed to academic excellence and spiritual growth.</p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Share">Γåù</a>
+            <a href="#" class="footer__social-link" aria-label="Instagram">ΓùÄ</a>
+            <a href="#" class="footer__social-link" aria-label="YouTube">Γû╢</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">Quick Links</h4>
+          <div class="footer__links">
+            <a href="index.html" class="footer__link">Home</a>
+            <a href="sermons.html" class="footer__link">Sermons</a>
+            <a href="contact.html" class="footer__link">Contact</a>
+            <a href="departments.html" class="footer__link">Departments</a>
+          </div>
+        </div>
+        <div>
+          <p class="footer__tagline" style="margin-top: 2rem;">┬⌐ 2024 PENSA-UMaT. Member of the UMaT Community.</p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        ┬⌐ 2024 PENSA-UMaT. Member of the UMaT Community.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== CELEBRATION MODAL ===== -->
+  <div class="modal-overlay" id="celebrationModal">
+    <div class="modal">
+      <button class="modal__close" aria-label="Close">Γ£ò</button>
+      <h3 class="modal__title">≡ƒÄë Send a Celebration!</h3>
+      <p class="modal__subtitle">Send a birthday celebration with a personal message, prayer, or blessing.</p>
+      <form id="celebrationForm">
+        <div class="form-group">
+          <label for="celebName">Your Name</label>
+          <input type="text" id="celebName" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="celebType">Celebration Type</label>
+          <select id="celebType">
+            <option value="birthday">≡ƒÄé Birthday Wishes</option>
+            <option value="prayer">≡ƒÖÅ Birthday Prayer</option>
+            <option value="blessing">Γ£¿ Special Blessing</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="celebMessage">Your Message</label>
+          <textarea id="celebMessage" placeholder="Write your heartfelt message here..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block">≡ƒÄë Send Celebration</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== MESSAGE MODAL ===== -->
+  <div class="modal-overlay" id="messageModal">
+    <div class="modal">
+      <button class="modal__close" aria-label="Close">Γ£ò</button>
+      <h3 class="modal__title">Write a Message</h3>
+      <p class="modal__subtitle">Send a personal birthday message to brighten their day.</p>
+      <form id="messageForm">
+        <div class="form-group">
+          <label for="msgName">Your Name</label>
+          <input type="text" id="msgName" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="msgContent">Your Message</label>
+          <textarea id="msgContent" placeholder="Write your message..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn--dark btn--block">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== UPDATE DETAILS MODAL ===== -->
+  <div class="modal-overlay" id="updateModal">
+    <div class="modal">
+      <button class="modal__close" aria-label="Close">Γ£ò</button>
+      <h3 class="modal__title">Update Birthday Details</h3>
+      <p class="modal__subtitle">Help us keep our records up to date. Submit your birthday information below.</p>
+      <form id="updateForm">
+        <div class="form-group">
+          <label for="updateName">Full Name</label>
+          <input type="text" id="updateName" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="updateBirthday">Date of Birth</label>
+          <input type="date" id="updateBirthday" required>
+        </div>
+        <div class="form-group">
+          <label for="updateEmail">Email Address</label>
+          <input type="email" id="updateEmail" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+          <label for="updateDept">Department (Optional)</label>
+          <select id="updateDept">
+            <option value="">Select department</option>
+            <option value="media">Media</option>
+            <option value="heralds">Heralds (Music and Arts)</option>
+            <option value="prayer">Prayer</option>
+            <option value="secretaries">secretaries</option>
+            <option value="pemsca">PEMSCA (for pastors' kids)</option>
+            <option value="evangelism">Evangelism</option>
+            <option value="biblestudies">Bible studies</option>
+            <option value="welfare">Welfare</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block">Submit Details</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+
+  <!-- ===== AUTH MODAL ===== -->
+  <div class="modal-overlay auth-modal" id="authModal">
+    <div class="modal">
+      <button class="modal__close" aria-label="Close">Γ£ò</button>
+      <h3 class="modal__title" style="margin-bottom: 4px;">Welcome to PENSAΓÇôUMaT</h3>
+      <p class="modal__subtitle">Christ in You ΓÇö The Hope of Glory</p>
+
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="signin">Sign In</button>
+        <button class="auth-tab" data-tab="register">Create Account</button>
+      </div>
+
+      <!-- Sign In Panel -->
+      <div class="auth-panel active" id="signinPanel">
+        <form id="signinForm">
+          <div class="form-group">
+            <label for="signinEmail">Email Address</label>
+            <input type="email" id="signinEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="signinPassword">Password</label>
+            <div class="password-field">
+              <input type="password" id="signinPassword" placeholder="Enter your password" required>
+              <span class="password-toggle">≡ƒæü</span>
+            </div>
+          </div>
+          <div class="auth-options">
+            <label><input type="checkbox"> Remember me</label>
+            <a href="#">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn--dark btn--block">Sign In ΓåÆ</button>
+        </form>
+      </div>
+
+      <!-- Register Panel -->
+      <div class="auth-panel" id="registerPanel">
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="registerName">Full Name</label>
+            <input type="text" id="registerName" placeholder="Enter your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">Email Address</label>
+            <input type="email" id="registerEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <div class="password-field">
+              <input type="password" id="registerPassword" placeholder="Create a password (min 6 chars)" required minlength="6">
+              <span class="password-toggle">≡ƒæü</span>
+            </div>
+            <div class="password-strength">
+              <div class="password-strength__bar"></div>
+              <div class="password-strength__bar"></div>
+              <div class="password-strength__bar"></div>
+              <div class="password-strength__bar"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="registerConfirmPassword">Confirm Password</label>
+            <div class="password-field">
+              <input type="password" id="registerConfirmPassword" placeholder="Confirm your password" required>
+              <span class="password-toggle">≡ƒæü</span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block">Create Account ΓåÆ</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

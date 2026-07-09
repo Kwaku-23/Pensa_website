@@ -1,0 +1,826 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Support the work of PENSA-UMaT through your generous giving. Tithes, offerings, and special donations to grow God's kingdom on campus.">
+  <title>Give | PENSA-UMaT</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <style>
+    /* ===== GIVE PAGE SPECIFIC STYLES ===== */
+    .give-intro {
+      padding: var(--space-4xl) 0;
+      text-align: center;
+    }
+
+    .give-intro__verse {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--gray-600);
+      max-width: 600px;
+      margin: 0 auto var(--space-sm);
+      line-height: 1.7;
+    }
+
+    .give-intro__ref {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gold-500);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .give-intro__text {
+      font-size: 0.95rem;
+      color: var(--gray-500);
+      max-width: 550px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .give-options {
+      padding: 0 0 var(--space-4xl);
+    }
+
+    .give-options__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .give-card {
+      text-align: center;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl) var(--space-xl);
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .give-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .give-card--featured {
+      border: 2px solid var(--gold-500);
+      background: linear-gradient(to bottom, rgba(212, 160, 23, 0.04), var(--white));
+      position: relative;
+    }
+
+    .give-card--featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold-500);
+      color: var(--navy-900);
+      padding: 3px 14px;
+      border-radius: var(--radius-xl);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .give-card__icon {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-full);
+      background: var(--gray-50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin: 0 auto var(--space-lg);
+    }
+
+    .give-card--featured .give-card__icon {
+      background: rgba(212, 160, 23, 0.15);
+    }
+
+    .give-card__title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+    }
+
+    .give-card__desc {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      line-height: 1.7;
+      margin-bottom: var(--space-xl);
+    }
+
+    /* Amount selector */
+    .give-form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: var(--space-3xl) 0;
+    }
+
+    .give-form__heading {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+    }
+
+    .give-form__sub {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--gray-500);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .amount-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+
+    .amount-btn {
+      padding: 0.8rem;
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .amount-btn:hover,
+    .amount-btn.active {
+      border-color: var(--gold-500);
+      background: rgba(212, 160, 23, 0.08);
+      color: var(--gold-500);
+    }
+
+    .give-form__custom {
+      margin-bottom: var(--space-xl);
+    }
+
+    .give-form__custom label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .give-form__custom-input {
+      display: flex;
+      align-items: center;
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color var(--transition-fast);
+    }
+
+    .give-form__custom-input:focus-within {
+      border-color: var(--navy-700);
+    }
+
+    .give-form__custom-input span {
+      padding: 0.7rem 1rem;
+      background: var(--gray-50);
+      font-weight: 600;
+      color: var(--gray-500);
+      border-right: 1px solid var(--gray-200);
+    }
+
+    .give-form__custom-input input {
+      flex: 1;
+      border: none;
+      padding: 0.7rem 1rem;
+      font-size: 1rem;
+    }
+
+    /* Payment methods */
+    .payment-methods {
+      padding: var(--space-xl) 0 var(--space-4xl);
+      text-align: center;
+    }
+
+    .payment-methods__title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: var(--space-xl);
+    }
+
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      max-width: 700px;
+      margin: 0 auto var(--space-2xl);
+    }
+
+    .payment-card {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .payment-card:hover,
+    .payment-card.active {
+      border-color: var(--gold-500);
+      background: rgba(212, 160, 23, 0.05);
+    }
+
+    .payment-card__icon {
+      font-size: 1.8rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .payment-card__name {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .payment-card__desc {
+      font-size: 0.75rem;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+
+    /* Bank details */
+    .bank-details {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      max-width: 600px;
+      margin: 0 auto var(--space-2xl);
+      text-align: left;
+    }
+
+    .bank-details__title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: var(--space-lg);
+      text-align: center;
+    }
+
+    .bank-details__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .bank-details__row:last-child {
+      border-bottom: none;
+    }
+
+    .bank-details__label {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+    }
+
+    .bank-details__value {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* Impact section */
+    .give-impact {
+      padding: var(--space-4xl) 0;
+      background: var(--navy-900);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .give-impact__title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: var(--space-md);
+    }
+
+    .give-impact__sub {
+      font-size: 0.95rem;
+      color: var(--gray-400);
+      max-width: 500px;
+      margin: 0 auto var(--space-2xl);
+    }
+
+    .impact-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-xl);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .impact-stat__number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--gold-500);
+      margin-bottom: var(--space-xs);
+    }
+
+    .impact-stat__label {
+      font-size: 0.85rem;
+      color: var(--gray-400);
+    }
+
+    @media (max-width: 768px) {
+      .give-options__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .amount-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .payment-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .impact-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar__logo"><!-- UPDATE IMAGE HERE --> <img src="images/logo.png" alt="PENSA-UMaT Logo" class="navbar__logo-img">PENSAΓÇôUMaT</a>
+      <div class="navbar__links" id="navLinks">
+        <a href="index.html" class="navbar__link">Home</a>
+        <div class="navbar__dropdown">
+          <button class="navbar__dropdown-toggle" aria-expanded="false">
+            About <span class="navbar__dropdown-arrow">Γû╝</span>
+          </button>
+          <div class="navbar__dropdown-menu">
+            <a href="about.html" class="navbar__dropdown-item">
+              <span class="navbar__dropdown-item__icon">≡ƒôû</span> About Us
+            </a>
+            <a href="leadership.html" class="navbar__dropdown-item">
+              <span class="navbar__dropdown-item__icon">≡ƒæÑ</span> Leadership
+            </a>
+            <a href="family.html" class="navbar__dropdown-item">
+              <span class="navbar__dropdown-item__icon">≡ƒÅá</span> Family / Zones
+            </a>
+          </div>
+        </div>
+        <a href="sermons.html" class="navbar__link">Sermons</a>
+        <a href="events.html" class="navbar__link">Events</a>
+        <a href="departments.html" class="navbar__link">Departments</a>
+        <a href="give.html" class="navbar__link navbar__link--active">Give</a>
+        <a href="contact.html" class="navbar__link">Contact</a>
+        <a href="birthdays.html" class="navbar__link">Birthdays</a>
+        <a href="#" class="navbar__cta" id="signInBtn" onclick="openAuthModal()">Sign In</a>
+      </div>
+      <!-- User Menu (shown when signed in) -->
+      <div class="user-menu" id="userMenu">
+        <button class="user-menu__trigger">
+          <div class="user-menu__avatar">U</div>
+          <span class="user-menu__trigger-name">User</span>
+        </button>
+        <div class="user-menu__dropdown">
+          <div class="user-menu__dropdown-header">
+            <div class="user-menu__dropdown-name">User Name</div>
+            <div class="user-menu__dropdown-email">user@email.com</div>
+          </div>
+          <a href="birthdays.html" class="user-menu__dropdown-item">≡ƒÄé Birthdays</a>
+          <a href="about.html" class="user-menu__dropdown-item">≡ƒæñ My Profile</a>
+          <button class="user-menu__dropdown-item user-menu__dropdown-item--danger" id="signOutBtn">≡ƒÜ¬ Sign Out</button>
+        </div>
+      </div>
+      <button class="navbar__hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero hero--give" id="heroGive">
+    <div class="hero__decoration hero__decoration--circle"></div>
+    <div class="hero__decoration hero__decoration--circle-2"></div>
+    <div class="hero__decoration hero__decoration--dots"></div>
+    <div class="hero__decoration hero__decoration--line"></div>
+    <div class="container">
+      <h1 class="hero__title" style="font-family: var(--font-serif);">Give Generously,<br>Impact Eternally.</h1>
+      <p class="hero__subtitle">Your generous giving supports the mission of PENSA-UMaT ΓÇö building the next generation
+        of Christ-centered leaders on campus.</p>
+    </div>
+  </section>
+
+  <!-- ===== SCRIPTURE INTRO ===== -->
+  <section class="give-intro" id="giveIntro">
+    <div class="container">
+      <p class="give-intro__verse">"Each of you should give what you have decided in your heart to give, not reluctantly
+        or under compulsion, for God loves a cheerful giver."</p>
+      <p class="give-intro__ref">2 Corinthians 9:7</p>
+      <p class="give-intro__text">Every contribution, no matter the size, plays a vital role in sustaining our
+        fellowship activities, outreach programs, welfare support, and campus ministry.</p>
+    </div>
+  </section>
+
+  <!-- ===== GIVING OPTIONS ===== -->
+  <section class="give-options" id="giveOptions">
+    <div class="container">
+      <div class="give-options__grid">
+        <div class="give-card">
+          <div class="give-card__icon">≡ƒÆ░</div>
+          <h3 class="give-card__title">Tithes</h3>
+          <p class="give-card__desc">Honor God with the firstfruits of your increase. Your tithes sustain the ministry
+            and keep the fellowship running.</p>
+          <button class="btn btn--dark btn--block give-type-btn" data-type="Tithes">Give Tithes</button>
+        </div>
+        <div class="give-card give-card--featured">
+          <div class="give-card__icon">≡ƒÖî</div>
+          <h3 class="give-card__title">Offerings</h3>
+          <p class="give-card__desc">A freewill offering to support the work of God. Your offering goes toward outreach,
+            events, and community support.</p>
+          <button class="btn btn--primary btn--block give-type-btn" data-type="Offerings">Give Offering</button>
+        </div>
+        <div class="give-card">
+          <div class="give-card__icon">≡ƒÄü</div>
+          <h3 class="give-card__title">Special Seeds</h3>
+          <p class="give-card__desc">Plant a seed for a specific cause ΓÇö building projects, welfare funds, missions
+            trips, or campus evangelism drives.</p>
+          <button class="btn btn--dark btn--block give-type-btn" data-type="Special Seeds">Give Special Seed</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GIVING FORM ===== -->
+  <section id="giveForm">
+    <div class="container">
+      <div class="give-form">
+        <h2 class="give-form__heading">Select an Amount</h2>
+        <p class="give-form__sub">Choose a preset amount or enter a custom value</p>
+        <div class="amount-grid">
+          <button class="amount-btn" data-amount="10">GHS 10</button>
+          <button class="amount-btn" data-amount="20">GHS 20</button>
+          <button class="amount-btn active" data-amount="50">GHS 50</button>
+          <button class="amount-btn" data-amount="100">GHS 100</button>
+          <button class="amount-btn" data-amount="200">GHS 200</button>
+          <button class="amount-btn" data-amount="500">GHS 500</button>
+          <button class="amount-btn" data-amount="1000">GHS 1,000</button>
+          <button class="amount-btn" data-amount="custom">Custom</button>
+        </div>
+        <div class="give-form__custom">
+          <label for="customAmount">Or enter a custom amount</label>
+          <div class="give-form__custom-input">
+            <span>GHS</span>
+            <input type="number" id="customAmount" placeholder="0.00" min="1">
+          </div>
+        </div>
+        <button class="btn btn--primary btn--block" id="proceedGiveBtn" style="padding: 1rem; font-size: 1rem;">Proceed
+          to Give ΓåÆ</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PAYMENT METHODS ===== -->
+  <section class="payment-methods" id="paymentMethods">
+    <div class="container">
+      <h3 class="payment-methods__title">Payment Methods</h3>
+      <div class="payment-grid">
+        <div class="payment-card active">
+          <div class="payment-card__icon">≡ƒô▒</div>
+          <div class="payment-card__name">Mobile Money</div>
+          <div class="payment-card__desc">MTN, Vodafone, AirtelTigo</div>
+        </div>
+        <div class="payment-card">
+          <div class="payment-card__icon">≡ƒÅª</div>
+          <div class="payment-card__name">Bank Transfer</div>
+          <div class="payment-card__desc">Direct bank deposit</div>
+        </div>
+        <div class="payment-card">
+          <div class="payment-card__icon">≡ƒÆ│</div>
+          <div class="payment-card__name">Card Payment</div>
+          <div class="payment-card__desc">Visa, Mastercard</div>
+        </div>
+      </div>
+
+      <!-- Bank Details -->
+      <div class="bank-details">
+        <h4 class="bank-details__title">Bank Transfer Details</h4>
+        <div class="bank-details__row">
+          <span class="bank-details__label">Bank Name</span>
+          <span class="bank-details__value">Ghana Commercial Bank (GCB)</span>
+        </div>
+        <div class="bank-details__row">
+          <span class="bank-details__label">Account Name</span>
+          <span class="bank-details__value">PENSA-UMaT</span>
+        </div>
+        <div class="bank-details__row">
+          <span class="bank-details__label">Account Number</span>
+          <span class="bank-details__value">1234567890</span>
+        </div>
+        <div class="bank-details__row">
+          <span class="bank-details__label">Branch</span>
+          <span class="bank-details__value">Tarkwa Branch</span>
+        </div>
+        <div class="bank-details__row">
+          <span class="bank-details__label">MoMo Number</span>
+          <span class="bank-details__value">+233 55 123 4567</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== IMPACT STATS ===== -->
+  <section class="give-impact" id="giveImpact">
+    <div class="container">
+      <h2 class="give-impact__title">Your Giving Makes a Difference</h2>
+      <p class="give-impact__sub">See how your contributions are impacting the kingdom and our community on campus.</p>
+      <div class="impact-stats">
+        <div>
+          <div class="impact-stat__number">1,200+</div>
+          <div class="impact-stat__label">Students Reached</div>
+        </div>
+        <div>
+          <div class="impact-stat__number">50+</div>
+          <div class="impact-stat__label">Outreach Events</div>
+        </div>
+        <div>
+          <div class="impact-stat__number">200+</div>
+          <div class="impact-stat__label">Welfare Beneficiaries</div>
+        </div>
+        <div>
+          <div class="impact-stat__number">15+</div>
+          <div class="impact-stat__label">Community Projects</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__logo"><!-- UPDATE IMAGE HERE --> <img src="images/logo.png" alt="PENSA-UMaT Logo" class="footer__logo-img">PENSAΓÇôUMaT</div>
+          <p class="footer__tagline">Equipping students to be Christ-like leaders in academia and beyond.</p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Twitter">≡¥òÅ</a>
+            <a href="#" class="footer__social-link" aria-label="Instagram">ΓùÄ</a>
+            <a href="#" class="footer__social-link" aria-label="YouTube">Γû╢</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">Quick Links</h4>
+          <div class="footer__links">
+            <a href="index.html" class="footer__link">Home</a>
+            <a href="sermons.html" class="footer__link">Sermons</a>
+            <a href="contact.html" class="footer__link">Contact</a>
+            <a href="departments.html" class="footer__link">Departments</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__heading">Contact Info</h4>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon">≡ƒôì</span>
+            <span>UMaT Main Campus, Tarkwa, Ghana</span>
+          </div>
+          <div class="footer__contact-item">
+            <span class="footer__contact-icon">Γ£ë∩╕Å</span>
+            <span>info@pensaumat.org</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        ┬⌐ 2024 PENSA-UMaT. Member of the UMaT Community.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // ===== PAYSTACK CONFIG =====
+    // Γ¼ç∩╕Å Paste your Paystack Test Public Key here
+    const PAYSTACK_PUBLIC_KEY = 'pk_test_df5f98b26b0071f6664bb7e704d3ceaf647d581c';
+
+    // ===== STATE =====
+    let selectedAmount = 5000;   // default GHS 50 (in pesewas ΓÇö always ├ù 100)
+    let selectedGiveType = 'Offerings'; // default giving type
+
+    // ===== GIVE TYPE BUTTONS =====
+    document.querySelectorAll('.give-type-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedGiveType = btn.dataset.type;
+        document.getElementById('giveForm').scrollIntoView({ behavior: 'smooth' });
+
+        // Update the form heading to reflect chosen type
+        document.querySelector('.give-form__heading').textContent = `Select an Amount ΓÇö ${selectedGiveType}`;
+      });
+    });
+
+    // ===== AMOUNT BUTTONS =====
+    document.querySelectorAll('.amount-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        if (btn.dataset.amount !== 'custom') {
+          selectedAmount = parseInt(btn.dataset.amount) * 100; // convert to pesewas
+          document.getElementById('customAmount').value = '';
+        } else {
+          document.getElementById('customAmount').value = '';
+          document.getElementById('customAmount').focus();
+          selectedAmount = 0;
+        }
+      });
+    });
+
+    // ===== CUSTOM AMOUNT INPUT =====
+    document.getElementById('customAmount').addEventListener('input', function () {
+      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+      const val = parseFloat(this.value);
+      selectedAmount = val ? Math.round(val * 100) : 0;
+    });
+
+    // ===== PAYMENT METHOD CARDS =====
+    document.querySelectorAll('.payment-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.payment-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+      });
+    });
+
+    // ===== PROCEED TO GIVE BUTTON =====
+    document.getElementById('proceedGiveBtn').addEventListener('click', () => {
+
+      // Validate amount
+      if (!selectedAmount || selectedAmount < 100) {
+        showToast('ΓÜá∩╕Å Please select or enter an amount of at least GHS 1.');
+        return;
+      }
+
+      // Ask for email
+      const email = prompt('Please enter your email address to continue:');
+      if (!email || !email.includes('@')) {
+        showToast('ΓÜá∩╕Å A valid email is required to process your gift.');
+        return;
+      }
+
+      const amountInGHS = (selectedAmount / 100).toFixed(2);
+
+      // Open Paystack payment popup
+      const handler = PaystackPop.setup({
+        key: PAYSTACK_PUBLIC_KEY,
+        email: email,
+        amount: selectedAmount,       // in pesewas
+        currency: 'GHS',
+        label: `PENSA-UMaT ${selectedGiveType}`,
+        metadata: {
+          custom_fields: [
+            {
+              display_name: 'Giving Type',
+              variable_name: 'giving_type',
+              value: selectedGiveType
+            }
+          ]
+        },
+
+        callback: function (response) {
+          // Γ£à Payment successful
+          showToast(`≡ƒÖÅ Thank you! Your ${selectedGiveType} of GHS ${amountInGHS} was received. God bless you!`);
+          showConfetti();
+        },
+
+        onClose: function () {
+          // User closed the popup without paying
+          showToast('Payment window closed. Your gift was not processed.');
+        }
+      });
+
+      handler.openIframe();
+    });
+
+    // ===== TOAST HELPER (in case main.js version isn't available) =====
+    function showToast(message) {
+      const existing = document.querySelector('.toast');
+      if (existing) existing.remove();
+
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<span class="toast__text">${message}</span>`;
+      document.body.appendChild(toast);
+      requestAnimationFrame(() => toast.classList.add('active'));
+      setTimeout(() => {
+        toast.classList.remove('active');
+        setTimeout(() => toast.remove(), 300);
+      }, 5000);
+    }
+
+    // ===== CONFETTI HELPER =====
+    function showConfetti() {
+      const colors = ['#d4a017', '#e8b830', '#0d1f3c', '#ef4444', '#22c55e', '#3b82f6'];
+      for (let i = 0; i < 80; i++) {
+        const el = document.createElement('div');
+        el.style.cssText = `
+        position:fixed; top:-10px;
+        left:${Math.random() * 100}%;
+        width:${6 + Math.random() * 8}px;
+        height:${6 + Math.random() * 8}px;
+        background:${colors[Math.floor(Math.random() * colors.length)]};
+        border-radius:${Math.random() > 0.5 ? '50%' : '0'};
+        pointer-events:none; z-index:9999;
+        animation: fall ${2 + Math.random() * 2}s ease-out forwards;
+        animation-delay:${Math.random() * 0.5}s;
+      `;
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 4000);
+      }
+    }
+  </script>
+
+  <!-- ===== AUTH MODAL ===== -->
+  <div class="modal-overlay auth-modal" id="authModal">
+    <div class="modal">
+      <button class="modal__close" aria-label="Close">Γ£ò</button>
+      <h3 class="modal__title" style="margin-bottom: 4px;">Welcome to PENSAΓÇôUMaT</h3>
+      <p class="modal__subtitle">Christ in You ΓÇö The Hope of Glory</p>
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="signin">Sign In</button>
+        <button class="auth-tab" data-tab="register">Create Account</button>
+      </div>
+      <div class="auth-panel active" id="signinPanel">
+        <form id="signinForm">
+          <div class="form-group">
+            <label for="signinEmail">Email Address</label>
+            <input type="email" id="signinEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="signinPassword">Password</label>
+            <div class="password-field">
+              <input type="password" id="signinPassword" placeholder="Enter your password" required>
+              <span class="password-toggle">≡ƒæü</span>
+            </div>
+          </div>
+          <div class="auth-options">
+            <label><input type="checkbox"> Remember me</label>
+            <a href="#">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn--dark btn--block">Sign In ΓåÆ</button>
+        </form>
+      </div>
+      <div class="auth-panel" id="registerPanel">
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="registerName">Full Name</label>
+            <input type="text" id="registerName" placeholder="Enter your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">Email Address</label>
+            <input type="email" id="registerEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <div class="password-field">
+              <input type="password" id="registerPassword" placeholder="Create a password (min 6 chars)" required
+                minlength="6">
+              <span class="password-toggle">≡ƒæü</span>
+            </div>
+            <div class="password-strength">
+              <div class="password-strength__bar"></div>
+              <div class="password-strength__bar"></div>
+              <div class="password-strength__bar"></div>
+              <div class="password-strength__bar"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="registerConfirmPassword">Confirm Password</label>
+            <div class="password-field">
+              <input type="password" id="registerConfirmPassword" placeholder="Confirm your password" required>
+              <span class="password-toggle">≡ƒæü</span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block">Create Account ΓåÆ</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="js/auth.js"></script>
+</body>
+
+</html>
