@@ -1640,6 +1640,7 @@ textarea {
 
 .footer__tagline {
   font-size: 1rem;
+  
   color: white;
   line-height: 1.7;
   margin-bottom: var(--space-lg);

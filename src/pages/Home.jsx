@@ -1,8 +1,37 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../supabaseClient';
 
 export default function Home() {
   const [subtitleText, setSubtitleText] = useState("");
+  const [latestSermon, setLatestSermon] = useState(null);
+  const [loadingSermon, setLoadingSermon] = useState(true);
+
+  useEffect(() => {
+    async function fetchLatestSermon() {
+      const { data, error } = await supabase
+        .from('sermons')
+        .select('*')
+        .order('date', { ascending: false })
+        .limit(1)
+        .single();
+
+      if (!error && data) {
+        setLatestSermon(data);
+      }
+      setLoadingSermon(false);
+    }
+    fetchLatestSermon();
+  }, []);
+
+  const formatDate = (dateStr) => {
+    if (!dateStr) return '';
+    return new Date(dateStr).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: '2-digit',
+    });
+  };
   const fullText = "Christ In You, The Hope of Glory";
 
   useEffect(() => {
@@ -72,34 +101,43 @@ export default function Home() {
             </div>
             <Link to="/sermons" className="latest-sermon__view-all">View all Sermons →</Link>
           </div>
-          <div className="latest-sermon__content">
-            <div className="latest-sermon__video" data-video="sermon">
-              <img src="/images/IMG_8837.JPG" alt="Latest Sermon - Navigating Purpose in Academia" />
-              <div className="latest-sermon__video-overlay">
-                <div className="play-btn"></div>
+          {loadingSermon ? (
+            <p style={{ textAlign: 'center', padding: '2rem' }}>Loading latest sermon...</p>
+          ) : latestSermon ? (
+            <div className="latest-sermon__content">
+              <div className="latest-sermon__video" data-video="sermon" style={{ padding: 0, overflow: 'hidden' }}>
+                <video
+                  controls
+                  style={{ width: '100%', height: '100%', display: 'block', borderRadius: 'inherit' }}
+                >
+                  <source src={latestSermon.video_url} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <span className="latest-sermon__badge badge badge--gold">Latest Message</span>
               </div>
-              <span className="latest-sermon__timestamp">08:22</span>
-              <span className="latest-sermon__badge badge badge--gold">Sunday Sermon</span>
-            </div>
-            <div className="latest-sermon__info">
-              <span className="latest-sermon__category">Sunday Sermon</span>
-              <h3 className="latest-sermon__title">Navigating Purpose in Academia</h3>
-              <p className="latest-sermon__desc">Discover how to align your academic pursuits with your divine calling. This
-                week's sermon dives deep into the intersection of faith, hard work, and finding true...</p>
-              <div className="latest-sermon__meta">
-                <div className="latest-sermon__meta-item">
-                  <span>👤</span> <span>Elder Jude Boadi</span>
+              <div className="latest-sermon__info">
+                <span className="latest-sermon__category">Sunday Sermon</span>
+                <h3 className="latest-sermon__title">{latestSermon.title}</h3>
+                {latestSermon.description && (
+                   <p className="latest-sermon__desc">{latestSermon.description}</p>
+                )}
+                <div className="latest-sermon__meta">
+                  <div className="latest-sermon__meta-item">
+                    <span>👤</span> <span>{latestSermon.speaker}</span>
+                  </div>
+                  <div className="latest-sermon__meta-item">
+                    <span>📅</span> <span>{formatDate(latestSermon.date)}</span>
+                  </div>
                 </div>
-                <div className="latest-sermon__meta-item">
-                  <span>📅</span> <span>June 07, 2026</span>
+                <div className="latest-sermon__actions">
+                  <Link to="/sermons" className="btn btn--dark">▶ View All Messages</Link>
+                  <button className="share-btn" aria-label="Share sermon">↗</button>
                 </div>
               </div>
-              <div className="latest-sermon__actions">
-                <Link to="/sermons" className="btn btn--dark">▶ Watch Now</Link>
-                <button className="share-btn" aria-label="Share sermon">↗</button>
-              </div>
             </div>
-          </div>
+          ) : (
+            <p style={{ textAlign: 'center', padding: '2rem' }}>No recent sermons available.</p>
+          )}
         </div>
       </section>
 
