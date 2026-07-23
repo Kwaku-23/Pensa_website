@@ -16,7 +16,6 @@ import Events from './pages/Events';
 import Departments from './pages/Departments';
 import Give from './pages/Give';
 import Contact from './pages/Contact';
-import Birthdays from './pages/Birthdays';
 import GalleryChallenge from './pages/GalleryChallenge';
 import GalleryPensice from './pages/GalleryPensice';
 
@@ -42,14 +41,13 @@ export default function App() {
             <Route path="/departments" element={<Departments />} />
             <Route path="/give" element={<Give />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/birthdays" element={<Birthdays onOpenAuth={openAuth} />} />
             <Route path="/gallery-challenge" element={<GalleryChallenge />} />
             <Route path="/gallery-pensice" element={<GalleryPensice />} />
           </Routes>
         </main>
         <Footer />
-        <AuthModal isOpen={authModalOpen} onClose={closeAuth} />
       </Router>
+      <AuthModal isOpen={authModalOpen} onClose={closeAuth} />
     </AuthProvider>
   );
 }

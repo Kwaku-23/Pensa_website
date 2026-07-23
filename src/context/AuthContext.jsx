@@ -1,50 +1,55 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { supabase } from '../supabaseClient';
 
 const AuthContext = createContext(null);
-const AUTH_KEY = 'pensaumat_user';
-const USERS_KEY = 'pensaumat_users';
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    const data = localStorage.getItem(AUTH_KEY);
-    return data ? JSON.parse(data) : null;
-  });
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const signIn = useCallback((email, password) => {
-    const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
-    const found = users.find(u => u.email === email && u.password === password);
-    if (found) {
-      const userData = { name: found.name, email: found.email };
-      localStorage.setItem(AUTH_KEY, JSON.stringify(userData));
-      setUser(userData);
-      return { success: true, user: userData };
-    }
-    return { success: false, error: 'Invalid email or password. Please try again.' };
+  useEffect(() => {
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  const register = useCallback((name, email, password) => {
-    const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
-    if (users.find(u => u.email === email)) {
-      return { success: false, error: 'An account with this email already exists.' };
-    }
-    users.push({ name, email, password });
-    localStorage.setItem(USERS_KEY, JSON.stringify(users));
-    const userData = { name, email };
-    localStorage.setItem(AUTH_KEY, JSON.stringify(userData));
-    setUser(userData);
-    return { success: true, user: userData };
-  }, []);
+  // Use the new fields in options.data
+  const register = async (email, password, metadata) => {
+    return await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: metadata
+      }
+    });
+  };
 
-  const signOut = useCallback(() => {
-    localStorage.removeItem(AUTH_KEY);
-    setUser(null);
-  }, []);
+  const signIn = async (email, password) => {
+    return await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
+  };
 
-  const isAuthenticated = user !== null;
+  const signOut = async () => {
+    return await supabase.auth.signOut();
+  };
+
+  const isAuthenticated = !!user;
 
   return (
-    <AuthContext.Provider value={{ user, signIn, register, signOut, isAuthenticated }}>
-      {children}
+    <AuthContext.Provider value={{ user, signIn, register, signOut, isAuthenticated, loading }}>
+      {!loading && children}
     </AuthContext.Provider>
   );
 }

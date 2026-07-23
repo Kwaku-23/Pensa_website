@@ -88,31 +88,47 @@ export default function Navbar({ onOpenAuth }) {
           <NavLink to="/departments" className={({ isActive }) => `navbar__link ${isActive ? 'navbar__link--active' : ''}`}>Departments</NavLink>
           <NavLink to="/give" className={({ isActive }) => `navbar__link ${isActive ? 'navbar__link--active' : ''}`}>Give</NavLink>
           <NavLink to="/contact" className={({ isActive }) => `navbar__link ${isActive ? 'navbar__link--active' : ''}`}>Contact</NavLink>
-          <NavLink to="/birthdays" className={({ isActive }) => `navbar__link ${isActive ? 'navbar__link--active' : ''}`}>Birthdays</NavLink>
 
-          {!isAuthenticated && (
-            <a href="#" className="navbar__cta" onClick={(e) => { e.preventDefault(); onOpenAuth(); }}>Sign In</a>
-          )}
         </div>
 
         {/* User Menu */}
-        {isAuthenticated && user && (
-          <div className={`user-menu active`} id="userMenu">
-            <button className="user-menu__trigger" onClick={(e) => { e.stopPropagation(); setIsUserMenuOpen(!isUserMenuOpen); }}>
-              <div className="user-menu__avatar">{user.name.charAt(0).toUpperCase()}</div>
-              <span className="user-menu__trigger-name">{user.name.split(' ')[0]}</span>
-            </button>
-            <div className={`user-menu__dropdown ${isUserMenuOpen ? 'open' : ''}`}>
-              <div className="user-menu__dropdown-header">
-                <div className="user-menu__dropdown-name">{user.name}</div>
-                <div className="user-menu__dropdown-email">{user.email}</div>
-              </div>
-              <Link to="/birthdays" className="user-menu__dropdown-item" onClick={() => setIsUserMenuOpen(false)}>Birthdays</Link>
-              <Link to="/about" className="user-menu__dropdown-item" onClick={() => setIsUserMenuOpen(false)}>My Profile</Link>
-              <button className="user-menu__dropdown-item user-menu__dropdown-item--danger" onClick={handleSignOut}>Sign Out</button>
+        <div className={`user-menu active`} id="userMenu">
+          <button className="user-menu__trigger" onClick={(e) => { e.stopPropagation(); setIsUserMenuOpen(!isUserMenuOpen); }}>
+            <div className="user-menu__avatar">
+              {isAuthenticated ? (user.user_metadata?.full_name?.charAt(0).toUpperCase() || 'U') : '👤'}
             </div>
+            <span className="user-menu__trigger-name">
+              {isAuthenticated ? (user.user_metadata?.full_name?.split(' ')[0] || 'User') : 'Guest'}
+            </span>
+          </button>
+          <div className={`user-menu__dropdown ${isUserMenuOpen ? 'open' : ''}`}>
+            {isAuthenticated ? (
+              <>
+                <div className="user-menu__dropdown-header">
+                  <div className="user-menu__dropdown-name">{user.user_metadata?.full_name || 'User'}</div>
+                  <div className="user-menu__dropdown-email">{user.email}</div>
+                </div>
+                <button className="user-menu__dropdown-item user-menu__dropdown-item--danger" onClick={handleSignOut}>Sign Out</button>
+              </>
+            ) : (
+              <>
+                <div className="user-menu__dropdown-header">
+                  <div className="user-menu__dropdown-name">Welcome!</div>
+                  <div className="user-menu__dropdown-email">Sign in to join the family</div>
+                </div>
+                <button 
+                  className="user-menu__dropdown-item" 
+                  onClick={() => { setIsUserMenuOpen(false); onOpenAuth(); }}
+                  style={{ fontWeight: '600', color: 'var(--navy-600)' }}
+                >
+                  Register / Sign In
+                </button>
+              </>
+            )}
           </div>
-        )}
+        </div>
+
+
 
         <button
           className={`navbar__hamburger ${isMobileOpen ? 'active' : ''}`}

@@ -379,10 +379,10 @@ textarea {
   z-index: 1000;
   background: transparent;
   border-bottom: none;
-  height: var(--nav-height);
+  padding: 1.5rem 0;
   display: flex;
   align-items: center;
-  transition: background var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+  transition: background var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base), padding var(--transition-base);
 }
 
 .navbar--scrolled {
@@ -391,6 +391,7 @@ textarea {
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(245, 216, 0, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(245, 216, 0, 0.05);
+  padding: 0.75rem 0;
 }
 
 .navbar .container {

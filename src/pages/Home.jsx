@@ -57,8 +57,8 @@ export default function Home() {
         <div className="container">
           <h1 className="hero__title">Welcome to PENSA-UMaT</h1>
           <p className="hero__subtitle" id="heroSubtitle">
-            <i style={{ 
-              borderRight: subtitleText.length < fullText.length ? '2px solid var(--gold-500)' : 'none', 
+            <i style={{
+              borderRight: subtitleText.length < fullText.length ? '2px solid var(--gold-500)' : 'none',
               paddingRight: '2px',
               animation: subtitleText.length < fullText.length ? 'typing-cursor 1s step-end infinite' : 'none'
             }}>
@@ -119,7 +119,7 @@ export default function Home() {
                 <span className="latest-sermon__category">Sunday Sermon</span>
                 <h3 className="latest-sermon__title">{latestSermon.title}</h3>
                 {latestSermon.description && (
-                   <p className="latest-sermon__desc">{latestSermon.description}</p>
+                  <p className="latest-sermon__desc">{latestSermon.description}</p>
                 )}
                 <div className="latest-sermon__meta">
                   <div className="latest-sermon__meta-item">

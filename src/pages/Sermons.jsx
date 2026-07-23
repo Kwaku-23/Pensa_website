@@ -8,6 +8,7 @@ export default function Sermons() {
 
   const [speakerFilter, setSpeakerFilter] = useState('');
   const [search, setSearch] = useState('');
+  const [activeVideo, setActiveVideo] = useState(null);
 
   useEffect(() => {
     async function fetchSermons() {
@@ -87,14 +88,12 @@ export default function Sermons() {
             <p>No sermons match your filters yet.</p>
           ) : (
             <div className="featured-sermon__content">
-              <div className="featured-sermon__video latest-sermon__video">
-                <video
-                  controls
-                  style={{ width: '100%', height: '100%', display: 'block', borderRadius: 'inherit' }}
-                >
-                  <source src={featured.video_url} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+              <div className="featured-sermon__video latest-sermon__video" onClick={() => setActiveVideo(featured)} style={{ cursor: 'pointer', backgroundColor: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                {featured.thumbnail_url ? (
+                  <img src={featured.thumbnail_url} alt={featured.title} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }} />
+                ) : (
+                  <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '4rem' }}>▶</div>
+                )}
                 <span className="latest-sermon__badge badge badge--gold">Latest Message</span>
               </div>
               <div className="featured-sermon__info latest-sermon__info">
@@ -157,12 +156,13 @@ export default function Sermons() {
           </div>
           <div className="sermon-grid__cards">
             {rest.map((sermon) => (
-              <div className="sermon-card" key={sermon.id}>
-                <div className="sermon-card__image">
-                  <video controls style={{ width: '100%', height: '100%', display: 'block' }}>
-                    <source src={sermon.video_url} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+              <div className="sermon-card" key={sermon.id} onClick={() => setActiveVideo(sermon)} style={{ cursor: 'pointer' }}>
+                <div className="sermon-card__image" style={{ backgroundColor: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                  {sermon.thumbnail_url ? (
+                    <img src={sermon.thumbnail_url} alt={sermon.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  ) : (
+                    <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '3rem' }}>▶</div>
+                  )}
                 </div>
                 <div className="sermon-card__body">
                   <h3 className="sermon-card__title">{sermon.title}</h3>
@@ -179,6 +179,30 @@ export default function Sermons() {
           )}
         </div>
       </section>
+
+      {/* ===== VIDEO MODAL ===== */}
+      {activeVideo && (
+        <div className="video-modal-overlay" onClick={() => setActiveVideo(null)} style={{
+          position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', 
+          backgroundColor: 'rgba(0,0,0,0.85)', zIndex: 9999,
+          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem'
+        }}>
+          <div className="video-modal-content" onClick={(e) => e.stopPropagation()} style={{
+            position: 'relative', width: '100%', maxWidth: '900px', backgroundColor: '#000', borderRadius: '12px', overflow: 'hidden',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
+          }}>
+            <button className="video-modal-close" onClick={() => setActiveVideo(null)} style={{
+              position: 'absolute', top: '15px', right: '20px', background: 'rgba(0,0,0,0.5)', border: 'none', color: '#fff', 
+              fontSize: '1.5rem', cursor: 'pointer', zIndex: 10, width: '40px', height: '40px', borderRadius: '50%',
+              display: 'flex', alignItems: 'center', justifyContent: 'center'
+            }}>✕</button>
+            <video controls autoPlay style={{ width: '100%', display: 'block', maxHeight: '80vh' }}>
+              <source src={activeVideo.video_url} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      )}
     </>
   );
 }
